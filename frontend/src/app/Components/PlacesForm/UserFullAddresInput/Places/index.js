@@ -25,8 +25,6 @@ export function PlacesInput() {
 
   const classes = getStyles();
 
-  const skip = () => setAddressComponents({});
-
   const onOptionSelected = async (event, value) => {
     if (!value) {
       setOptionSelected(undefined);
@@ -103,7 +101,6 @@ export function PlacesInput() {
           {getString('STR_CONTINUE')}
         </Button>
 
-        <Button onClick={skip}>{getString('STR_SKIP')}</Button>
         <Button onClick={exit}>{getString('STR_CANCEL')}</Button>
       </ControlButtonContainer>
     </>

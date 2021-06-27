@@ -13,15 +13,12 @@ export const FormContainer = () => {
   const {
     userHasStarted,
     addressComponents,
-    googleAPIKey,
     isLoading,
   } = useFormPlaces();
 
-  console.log({ addressComponents });
-
   if (isLoading) return <Loading />;
   if (!userHasStarted) return <GetStarted />;
-  if (!addressComponents && googleAPIKey) return <UserFullAddresInput />;
+  if (!addressComponents) return <UserFullAddresInput />;
 
   return <FormBody />;
 };

@@ -1,15 +1,47 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+// import axios from 'axios';
 
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
 import mexicoValidatorSchema from '../../../../lib/schemas/models/validators/mexico';
 import { ControlButtonContainer } from '../ControlButtonsContainer';
 import { getCountrySegmentsExtrator } from '../../../../lib/helpers/address';
+import { Loading } from '../Loading';
+
+// async function getAdministrativeLevelsInformationFromPostalCode(postalCode) {
+//   if (!postalCode) return null;
+
+//   try {
+//     const url = `https://apisgratis.com/api/codigospostales/v2/colonias/cp/?valor=${postalCode}`;
+//     const response = await fetch(url, { method: 'GET' });
+//     console.log({ response });
+//     const result = await response.json();
+
+//     const list = Array.isArray(result)
+//       ? result
+//       : [result];
+
+//     const [firstResult] = list;
+
+//     if (!firstResult) return null;
+
+//     const {
+//       Municipio: municipio,
+//       Ciudad: ciudad,
+//       Entidad: estado,
+//     } = firstResult;
+
+//     return { municipio, ciudad, estado };
+//   } catch (e) {
+//     console.error(e);
+//     return null;
+//   }
+// }
 
 export default function MexicoForm() {
   const {
@@ -17,9 +49,21 @@ export default function MexicoForm() {
     getString,
     submit,
     exit,
+    getService,
   } = useFormPlaces();
 
-  const initialValues = getCountrySegmentsExtrator('mx')(addressComponents);
+  const extractedFeatures = getCountrySegmentsExtrator('mx')(addressComponents);
+
+  const [initialValues, setInitialValues] = useState(extractedFeatures);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(async () => {
+    const service = getService();
+    setIsLoading(true);
+    const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode(initialValues.codigoPostal);
+    setIsLoading(false);
+    if (administrativeLevelInformation) setInitialValues({ ...extractedFeatures, ...administrativeLevelInformation });
+  }, []);
 
   const classes = getStyles();
 
@@ -53,6 +97,12 @@ export default function MexicoForm() {
     </div>
   );
 
+  if (isLoading) {
+    return (
+      <Loading />
+    );
+  }
+
   return (
     <>
       <p>{getString('FORM_BODY_TEXT')}</p>
@@ -61,7 +111,7 @@ export default function MexicoForm() {
           {getInput('estado', 'Estado', true)}
           {getInput('ciudad', 'Ciudad', true)}
           {getInput('colonia', 'Colonia', true)}
-          {getInput('municipio', 'Municipio', true)}
+          {getInput('municipio', 'Delegación', true)}
           {getInput('calle', 'Calle', true)}
           {getInput('codigoPostal', 'Codigo Postal', true)}
           {getInput('numExt', 'Número exterior', true)}

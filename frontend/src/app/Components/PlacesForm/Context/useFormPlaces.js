@@ -14,7 +14,7 @@ export const useFormPlaces = () => {
     setFullAddress,
     exit,
     submit,
-    isFormValid,
+    getService,
 
     addressComponents,
     setAddressComponents,
@@ -33,7 +33,7 @@ export const useFormPlaces = () => {
     setFullAddress,
     exit,
     submit,
-    isFormValid,
+    getService,
 
     addressComponents,
     setAddressComponents,

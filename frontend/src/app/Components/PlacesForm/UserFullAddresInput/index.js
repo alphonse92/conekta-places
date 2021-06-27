@@ -15,7 +15,7 @@ function UserFullAddresInputComponent() {
 
   const classes = getStyles();
 
-  const [userAlreadyHaveAPlaceInGoogle, setUserAlreadyHaveAPlaceInGoogle] = useState(true);
+  const [userAlreadyHaveAPlaceInGoogle, setUserAlreadyHaveAPlaceInGoogle] = useState(false);
 
   const onGooglePlacesToggled = () => setUserAlreadyHaveAPlaceInGoogle(!userAlreadyHaveAPlaceInGoogle);
   const component = userAlreadyHaveAPlaceInGoogle

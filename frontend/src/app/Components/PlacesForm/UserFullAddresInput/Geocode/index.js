@@ -20,8 +20,6 @@ export function GeocodeAddressInput() {
 
   const classes = getStyles();
 
-  const skip = () => setAddressComponents({});
-
   const getAddressComponents = async () => {
     setIsLoading(true);
 
@@ -66,7 +64,6 @@ export function GeocodeAddressInput() {
           {getString('STR_CONTINUE')}
         </Button>
 
-        <Button onClick={skip}>{getString('STR_SKIP')}</Button>
         <Button onClick={exit}>{getString('STR_CANCEL')}</Button>
       </ControlButtonContainer>
     </>

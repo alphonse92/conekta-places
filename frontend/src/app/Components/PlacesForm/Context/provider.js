@@ -29,13 +29,15 @@ export const FormPlacesProvider = ({
     setAddressComponents(undefined);
   };
 
-  const submit = (values) => {
-    const service = createService(serviceName, {
-      apiUrl,
-      appId,
-    });
+  const getService = () => createService(serviceName, {
+    apiUrl,
+    appId,
+  });
 
-    service.saveAddress(values);
+  const submit = async (values) => {
+    const service = getService();
+    const result = await service.saveAddress(values);
+    return result;
   };
 
   const contextValue = {
@@ -53,6 +55,7 @@ export const FormPlacesProvider = ({
     setAddressComponents,
     setIsLoading,
     submit,
+    getService,
   };
 
   return React.createElement(
