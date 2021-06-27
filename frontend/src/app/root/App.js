@@ -19,6 +19,9 @@ function App() {
           <PlacesForm
             language={document.documentElement.lang}
             googleAPIKey={process.env.REACT_APP_ENV_GOOGLE_API_KEY}
+            apiUrl={process.env.REACT_APP_ENV_PLACES_FORM_SERVICE_API_URL}
+            appId={process.env.REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID}
+            serviceName={process.env.REACT_APP_ENV_SERVICE_NAME}
           />
         </div>
       </div>

@@ -1,17 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import AppContext from './context';
 import { LANG } from '../../../../lib/lang';
+import { createService } from '../../../../services/index.js';
 
-export const FormPlacesProvider = ({ children, language, googleAPIKey: gApiK }) => {
+export const FormPlacesProvider = ({
+  children,
+  language,
+  googleAPIKey: gApiK,
+  apiUrl,
+  appId,
+  serviceName,
+}) => {
   const [userHasStarted, setUserStarted] = useState(false);
   const [fullAddress, setFullAddress] = useState();
   const [selectedLang, setLang] = useState(language);
   const [addressComponents, setAddressComponents] = useState();
   const [googleAPIKey] = useState(gApiK);
   const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => { }, []);
 
   const startUserPlacesFlow = () => setUserStarted(true);
 
@@ -23,9 +29,14 @@ export const FormPlacesProvider = ({ children, language, googleAPIKey: gApiK }) 
     setAddressComponents(undefined);
   };
 
-  const isFormValid = () => true;
+  const submit = (values) => {
+    const service = createService(serviceName, {
+      apiUrl,
+      appId,
+    });
 
-  const submit = console.log;
+    service.saveAddress(values);
+  };
 
   const contextValue = {
     userHasStarted,
@@ -42,7 +53,6 @@ export const FormPlacesProvider = ({ children, language, googleAPIKey: gApiK }) 
     setAddressComponents,
     setIsLoading,
     submit,
-    isFormValid,
   };
 
   return React.createElement(
@@ -65,6 +75,9 @@ FormPlacesProvider.propTypes = {
   ]).isRequired,
   language: PropTypes.string,
   googleAPIKey: PropTypes.string,
+  apiUrl: PropTypes.string.isRequired,
+  appId: PropTypes.string.isRequired,
+  serviceName: PropTypes.string.isRequired,
 };
 
 FormPlacesProvider.displayName = 'AppProvider';

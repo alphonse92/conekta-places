@@ -11,11 +11,23 @@ import { getStyles } from './styles';
  * @param {*} props {language}
  * @returns {React.Component} Places form component
  */
-export default function PlacesFormRoot({ language, googleAPIKey }) {
+export default function PlacesFormRoot({
+  language,
+  googleAPIKey,
+  apiUrl,
+  appId,
+  serviceName,
+}) {
   const classes = getStyles();
   return (
     <div className={classnames(classes.root)}>
-      <FormPlacesProvider language={language} googleAPIKey={googleAPIKey}>
+      <FormPlacesProvider
+        language={language}
+        googleAPIKey={googleAPIKey}
+        apiUrl={apiUrl}
+        appId={appId}
+        serviceName={serviceName}
+      >
         <FormContainer />
       </FormPlacesProvider>
     </div>
@@ -25,6 +37,9 @@ export default function PlacesFormRoot({ language, googleAPIKey }) {
 PlacesFormRoot.propTypes = {
   language: PropTypes.string,
   googleAPIKey: PropTypes.string,
+  apiUrl: PropTypes.string.isRequired,
+  appId: PropTypes.string.isRequired,
+  serviceName: PropTypes.string.isRequired,
 };
 
 PlacesFormRoot.defaultProps = {

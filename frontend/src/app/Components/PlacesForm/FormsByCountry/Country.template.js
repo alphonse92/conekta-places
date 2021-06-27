@@ -52,22 +52,22 @@ export default function CountryFormTemplate() {
   const containErrors = Boolean(Object.keys(formik.errors).length);
 
   // Function helper, it's only returning a Configured Input field
-  const getInput = (inputUniqueName, isRequired) => (
+  const getInput = (id, label, isRequired) => (
     <div className={classnames(classes.formBodyRowContainer)}>
       <TextField
         fullWidth
-        id={inputUniqueName}
-        name={inputUniqueName}
-        label={inputUniqueName}
-        value={formik.values[inputUniqueName]}
+        id={id}
+        name={id}
+        label={label}
+        value={formik.values[id]}
         onChange={formik.handleChange}
-        error={formik.touched[inputUniqueName] && Boolean(formik.errors[inputUniqueName])}
+        error={formik.touched[id] && Boolean(formik.errors[id])}
         helperText={(
-          (formik.touched[inputUniqueName] && formik.errors[inputUniqueName])
+          (formik.touched[id] && formik.errors[id])
             // formik.errors[inputUniqueName] is an string according to the current error of this field
             // For example, should be a number, positive, greater than, and required
             // And then get the error text for the given error
-            ? getString(formik.errors[inputUniqueName] || 'INPUT_ERROR_DEF')
+            ? getString(formik.errors[id] || 'INPUT_ERROR_DEF')
             : (
               // In helper text show * Required if the input is required
               isRequired
@@ -85,14 +85,14 @@ export default function CountryFormTemplate() {
       <p>{getString('FORM_BODY_TEXT')}</p>
       <form onSubmit={formik.handleSubmit}>
         <div className={classnames(classes.formBodyContainer)}>
-          {getInput('estado', true)}
-          {getInput('ciudad', true)}
-          {getInput('colonia', true)}
-          {getInput('municipio', true)}
-          {getInput('calle', true)}
-          {getInput('codigoPostal', true)}
-          {getInput('numExt', true)}
-          {getInput('numInt', false)}
+          {getInput('estado', 'Estado', true)}
+          {getInput('ciudad', 'Ciudad', true)}
+          {getInput('colonia', 'Colonia', true)}
+          {getInput('municipio', 'Municipio', true)}
+          {getInput('calle', 'Calle', true)}
+          {getInput('codigoPostal', 'Codigo Postal', true)}
+          {getInput('numExt', 'Número exterior', true)}
+          {getInput('numInt', 'Número interior', false)}
         </div>
         <ControlButtonContainer>
           <Button

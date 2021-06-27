@@ -30,19 +30,19 @@ export default function MexicoForm() {
   });
 
   const containErrors = Boolean(Object.keys(formik.errors).length);
-  const getInput = (inputUniqueName, isRequired) => (
+  const getInput = (id, label, isRequired) => (
     <div className={classnames(classes.formBodyRowContainer)}>
       <TextField
         fullWidth
-        id={inputUniqueName}
-        name={inputUniqueName}
-        label={inputUniqueName}
-        value={formik.values[inputUniqueName]}
+        id={id}
+        name={id}
+        label={label}
+        value={formik.values[id]}
         onChange={formik.handleChange}
-        error={formik.touched[inputUniqueName] && Boolean(formik.errors[inputUniqueName])}
+        error={formik.touched[id] && Boolean(formik.errors[id])}
         helperText={(
-          (formik.touched[inputUniqueName] && formik.errors[inputUniqueName])
-            ? getString(formik.errors[inputUniqueName] || 'INPUT_ERROR_DEF')
+          (formik.touched[id] && formik.errors[id])
+            ? getString(formik.errors[id] || 'INPUT_ERROR_DEF')
             : (
               isRequired
                 ? getString('INPUT_REQUIRED_HELPER')
@@ -58,14 +58,14 @@ export default function MexicoForm() {
       <p>{getString('FORM_BODY_TEXT')}</p>
       <form onSubmit={formik.handleSubmit}>
         <div className={classnames(classes.formBodyContainer)}>
-          {getInput('estado', true)}
-          {getInput('ciudad', true)}
-          {getInput('colonia', true)}
-          {getInput('municipio', true)}
-          {getInput('calle', true)}
-          {getInput('codigoPostal', true)}
-          {getInput('numExt', true)}
-          {getInput('numInt', false)}
+          {getInput('estado', 'Estado', true)}
+          {getInput('ciudad', 'Ciudad', true)}
+          {getInput('colonia', 'Colonia', true)}
+          {getInput('municipio', 'Municipio', true)}
+          {getInput('calle', 'Calle', true)}
+          {getInput('codigoPostal', 'Codigo Postal', true)}
+          {getInput('numExt', 'Número exterior', true)}
+          {getInput('numInt', 'Número interior', false)}
         </div>
         <ControlButtonContainer>
           <Button
