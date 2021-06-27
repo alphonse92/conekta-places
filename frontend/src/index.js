@@ -6,8 +6,6 @@ import App from './app/root/App';
 import reportWebVitals from './reportWebVitals';
 import theme from './theme';
 
-console.log('Running app in:', process.env.REACT_APP_ENV);
-
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>

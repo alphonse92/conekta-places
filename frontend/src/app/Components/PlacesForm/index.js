@@ -1,27 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 
-import { GetStarted } from '../GetStarted';
-import { AppProvider } from '../../store/AppProvider';
-import { COUNTRY_ADRESS_SCHEMAS } from '../../../lib/schemas/country-addresses';
+import { FormContainer } from './Form.container';
+import { FormPlacesProvider } from './Context/provider';
+import { getStyles } from './styles';
 
-function PlacesForm({ language }) {
+/**
+ * Form Root, this wraps the Form container component with it provider.
+ * @param {*} props {language}
+ * @returns {React.Component} Places form component
+ */
+export default function PlacesFormRoot({ language, googleAPIKey }) {
+  const classes = getStyles();
   return (
-    <AppProvider language={language}>
-      <GetStarted />
-    </AppProvider>
+    <div className={classnames(classes.root)}>
+      <FormPlacesProvider language={language} googleAPIKey={googleAPIKey}>
+        <FormContainer />
+      </FormPlacesProvider>
+    </div>
   );
 }
 
-PlacesForm.locations = Object.keys(COUNTRY_ADRESS_SCHEMAS).reduce((acc, loc) => ({ ...acc, [loc]: loc }), {});
-
-PlacesForm.propTypes = {
+PlacesFormRoot.propTypes = {
   language: PropTypes.string,
-  location: PropTypes.string.isRequired,
+  googleAPIKey: PropTypes.string,
 };
 
-PlacesForm.defaultProps = {
+PlacesFormRoot.defaultProps = {
   language: 'en',
+  googleAPIKey: undefined,
 };
-
-export default PlacesForm;

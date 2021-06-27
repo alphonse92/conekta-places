@@ -2,6 +2,9 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { colors } from './lib/constants/colors';
 
 export default createMuiTheme({
+  spacing: {
+    default: '13px',
+  },
   breakpoints: {
     values: {
       xs: 0,

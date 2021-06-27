@@ -1,12 +1,12 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { useApp } from '../../store/useApp';
+import { useFormPlaces } from '../Context/useFormPlaces';
 
 export const GetStarted = () => {
   const {
     startUserPlacesFlow,
     getString,
-  } = useApp();
+  } = useFormPlaces();
 
   return (
     <>

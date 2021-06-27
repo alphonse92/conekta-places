@@ -16,4 +16,7 @@ export const getStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     fontSize: 'calc(10px + 2vmin)',
   },
+  formContainer: {
+    minWidth: '50%',
+  },
 }));
