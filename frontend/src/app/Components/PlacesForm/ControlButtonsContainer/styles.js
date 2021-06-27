@@ -5,7 +5,7 @@ export const getStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row-reverse',
     '& button': {
-      marginLeft: theme.spacing.default,
+      marginLeft: theme.margin.default,
     },
   },
 }));

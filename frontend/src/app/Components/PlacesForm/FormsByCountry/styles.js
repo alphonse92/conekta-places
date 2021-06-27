@@ -8,12 +8,13 @@ export const getStyles = makeStyles((theme) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
+    marginBottom: theme.margin.default,
   },
   formBodyRowContainer: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    marginBottom: theme.margin.default,
+    marginBottom: theme.margin.double,
   },
   formInput: {
     width: '100%',

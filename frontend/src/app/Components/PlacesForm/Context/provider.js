@@ -25,11 +25,7 @@ export const FormPlacesProvider = ({ children, language, googleAPIKey: gApiK }) 
 
   const isFormValid = () => true;
 
-  const submit = () => {
-    if (isFormValid()) {
-      console.log('submiting');
-    }
-  };
+  const submit = console.log;
 
   const contextValue = {
     userHasStarted,

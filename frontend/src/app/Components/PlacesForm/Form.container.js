@@ -3,7 +3,7 @@ import { GetStarted } from './GetStarted';
 import { useFormPlaces } from './Context/useFormPlaces';
 import { UserFullAddresInput } from './UserFullAddresInput';
 import { Loading } from './Loading';
-import { FormBody } from './Form.body';
+import { FormBody } from './Form';
 
 /**
  * This component handles the user interaction along the stages the user directions flow

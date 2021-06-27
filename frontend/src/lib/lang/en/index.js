@@ -12,4 +12,9 @@ export default {
   FORM_BODY_TEXT: 'We are close...',
   FORM_BODY_AGREEMENT: 'I confirm this is my real address',
   ERROR_COUNTRY_NOT_AVAILABLE: 'Oh no! We are not in your country (yet)',
+
+  // Form Errors messages
+  INPUT_ERROR_DEF: 'Seems like this value is not right :(',
+  INPUT_REQUIRED: 'We need to know this.',
+  INPUT_REQUIRED_HELPER: '* Required',
 };

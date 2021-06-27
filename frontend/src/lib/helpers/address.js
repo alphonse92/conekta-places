@@ -1,3 +1,38 @@
+import _get from 'lodash/get';
+
+/**
+ * This function returns a object which represents mexico address.
+ * @param {*} components Address components, take a look on extractGoogleGeocodeComponents functions
+ * @returns {Object} object with mexico address information
+ */
+export const extractMexicoSegmentsFromComponents = (components) => ({
+  calle: _get(components, 'route.name', ''),
+  numExt: '',
+  numInt: '',
+  codigoPostal: _get(components, 'postalCode', ''),
+  colonia: _get(components, 'neighborhood.name', ''),
+  municipio: _get(components, 'sublocality.name', ''),
+  ciudad: _get(components, 'locality.id', ''),
+  estado: _get(components, 'state.name', ''),
+  pais: _get(components, 'country.name', ''),
+});
+
+// Example of custom country extractors
+export const extractArgentinaSegmentsFromComponents = () => ({});
+export const extractBrazilSegmentsFromComponents = () => ({});
+
+export const getCountrySegmentsExtrator = (countryId) => ({
+  mx: extractMexicoSegmentsFromComponents,
+  // Example of how to support multiples country extractors
+  ar: extractArgentinaSegmentsFromComponents,
+  br: extractBrazilSegmentsFromComponents,
+}[countryId]);
+
+/**
+ * This function proccess the google geocode results and returns a friendly and meanful object
+ * @param {*} result google geocode result object
+ * @returns {Object} a friendly and meanful object
+ */
 export const extractGoogleGeocodeComponents = (result) => {
   const {
     address_components: components = [],
@@ -53,9 +88,9 @@ export const extractGoogleGeocodeComponents = (result) => {
         name: longName,
       };
     } else if (types.postal_code) {
-      componentsObj.postalCode = Number(longName);
+      componentsObj.postalCode = longName;
     } else if (types.street_number) {
-      componentsObj.postalCode = Number(longName);
+      componentsObj.street_number = longName;
     }
 
     return componentsObj;

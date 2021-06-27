@@ -12,4 +12,9 @@ export default {
   FORM_BODY_TEXT: 'Un poquito...',
   FORM_BODY_AGREEMENT: 'Confirmo que ésta es mi direccion real',
   ERROR_COUNTRY_NOT_AVAILABLE: 'Oh no! No estamos en tu país (aún).',
+
+  // Form Errors messages
+  INPUT_ERROR_DEF: 'Parece que este valor no es correcto :(',
+  INPUT_REQUIRED: 'Necesitamos saber esto de ti',
+  INPUT_REQUIRED_HELPER: '* Requerido',
 };
