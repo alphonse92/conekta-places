@@ -3,13 +3,16 @@ import healthRouter from './health';
 import infoRouter from './info';
 import addressRouter from './address';
 
-const mainRouter = expresRouter();
+export default (Server) => {
+  const root = expresRouter();
 
-mainRouter.use('/v1', healthRouter);
-mainRouter.use('/v1', infoRouter);
-mainRouter.use('/v1', addressRouter);
+  root.use('/v1', healthRouter(Server));
+  root.use('/v1', infoRouter(Server));
+  root.use('/v1', addressRouter(Server));
 
-// append your custom routers for the version 1 of your api
-// mainRouter.use('/v1', infoRouter);
+  // append your custom routers for the version 1 of your api
+  // mainRouter.use('/v1', infoRouter);
 
-export default mainRouter;
+  return root;
+};
+

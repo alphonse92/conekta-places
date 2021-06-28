@@ -1,26 +1,26 @@
-export const getAddress = (req, res) => {
+export const getSingleAddressController = Server => (req, res) => {
   // Do something to store  in database
   res.send('ok');
 };
 
-export const getAddresses = (req, res) => {
+export const getAddressesController = Server => (req, res) => {
   // Do something to store  in database
   res.send('ok');
 };
 
-export const saveAddress = (req, res) => {
+export const getSaveAddressController = Server => (req, res) => {
+  const { body } = req;
+  // Do something to store  in database
+  res.send({ body, config: Server.config });
+};
+
+export const getUpdateAddressController = Server => (req, res) => {
   const { body } = req;
   // Do something to store  in database
   res.send(body);
 };
 
-export const updateAddress = (req, res) => {
-  const { body } = req;
-  // Do something to store  in database
-  res.send(body);
-};
-
-export const deleteAddress = (req, res) => {
+export const getDeleteAddressController = Server => (req, res) => {
   // Do something to store  in database
   res.send('ok');
 };

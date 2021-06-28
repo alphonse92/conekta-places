@@ -1,9 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import v1Routes from './v1/routes';
-import { getAllowAppIdMiddleware } from './v1/middlewares/security';
 import connectToMongo from './database/mongo';
 import { loadModels as getMongoModels } from './v1/models';
+import createV1Routes from './v1/routes';
+import { getAllowAppIdMiddleware } from './v1/middlewares/security';
 
 let singletonAppInsance = null;
 
@@ -60,7 +60,7 @@ export class Server {
   }
 
   loadRoutes() {
-    this.app.use('/api', v1Routes);
+    this.app.use('/api', createV1Routes(this));
   }
 
   async startMongoAndMongoose() {
