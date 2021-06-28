@@ -13,36 +13,6 @@ import { ControlButtonContainer } from '../ControlButtonsContainer';
 import { getCountrySegmentsExtrator } from '../../../../lib/helpers/address';
 import { Loading } from '../Loading';
 
-// async function getAdministrativeLevelsInformationFromPostalCode(postalCode) {
-//   if (!postalCode) return null;
-
-//   try {
-//     const url = `https://apisgratis.com/api/codigospostales/v2/colonias/cp/?valor=${postalCode}`;
-//     const response = await fetch(url, { method: 'GET' });
-//     console.log({ response });
-//     const result = await response.json();
-
-//     const list = Array.isArray(result)
-//       ? result
-//       : [result];
-
-//     const [firstResult] = list;
-
-//     if (!firstResult) return null;
-
-//     const {
-//       Municipio: municipio,
-//       Ciudad: ciudad,
-//       Entidad: estado,
-//     } = firstResult;
-
-//     return { municipio, ciudad, estado };
-//   } catch (e) {
-//     console.error(e);
-//     return null;
-//   }
-// }
-
 export default function MexicoForm() {
   const {
     addressComponents = {},
@@ -60,9 +30,13 @@ export default function MexicoForm() {
   useEffect(async () => {
     const service = getService();
     setIsLoading(true);
-    const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode(initialValues.codigoPostal);
+    const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode('mx', initialValues.codigoPostal);
     setIsLoading(false);
-    if (administrativeLevelInformation) setInitialValues({ ...extractedFeatures, ...administrativeLevelInformation });
+    if (administrativeLevelInformation) {
+      const newvalsx = { ...extractedFeatures, ...administrativeLevelInformation };
+      console.log(newvalsx);
+      setInitialValues(newvalsx);
+    }
   }, []);
 
   const classes = getStyles();
@@ -71,6 +45,7 @@ export default function MexicoForm() {
     initialValues,
     validationSchema: mexicoValidatorSchema,
     onSubmit: submit,
+    enableReinitialize: true,
   });
 
   const containErrors = Boolean(Object.keys(formik.errors).length);

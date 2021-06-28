@@ -11,7 +11,7 @@ export const extractMexicoSegmentsFromComponents = (components) => ({
   numInt: '',
   codigoPostal: _get(components, 'postalCode', ''),
   colonia: _get(components, 'sublocality.name', ''),
-  municipio: _get(components, 'sublocality.name', ''),
+  municipio: _get(components, 'locality.name', ''),
   ciudad: _get(components, 'locality.name', ''),
   estado: _get(components, 'state.name', ''),
   pais: _get(components, 'country.name', ''),

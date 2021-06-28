@@ -37,6 +37,7 @@ export const FormPlacesProvider = ({
   const submit = async (values) => {
     const service = getService();
     const result = await service.saveAddress(values);
+    console.log(result);
     return result;
   };
 
