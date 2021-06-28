@@ -1,5 +1,5 @@
 import { createMuiTheme } from '@material-ui/core/styles';
-import { colors } from './lib/constants/colors';
+import { colors } from 'conekta-places-lib/constants/colors';
 
 export default createMuiTheme({
   margin: {

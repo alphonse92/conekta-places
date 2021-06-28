@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { extractGoogleGeocodeComponents } from 'conekta-places-lib/helpers/address';
 
 import { useFormPlaces } from '../../Context/useFormPlaces';
 import { getStyles } from '../styles';
 import { ControlButtonContainer } from '../../ControlButtonsContainer';
-import { extractGoogleGeocodeComponents } from '../../../../../lib/helpers/address';
 
 export function GeocodeAddressInput() {
   const {

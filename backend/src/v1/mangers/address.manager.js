@@ -6,6 +6,10 @@ export class AddressManager extends BaseManager {
     this.model = this.Server.mongo.models.address;
   }
 
+  static extractAddressModelData() {
+
+  }
+
   async create(data) {
     const cleanedData = data;
     return super.create(cleanedData);

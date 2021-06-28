@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
+import _debounce from 'lodash/debounce';
+import _get from 'lodash/get';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import _debounce from 'lodash/debounce';
-import _get from 'lodash/get';
+import { findPlacesFromQuery, getPlaceDetails } from 'conekta-places-lib/helpers/gmaps';
+import { extractGoogleGeocodeComponents } from 'conekta-places-lib/helpers/address';
 
 import { useFormPlaces } from '../../Context/useFormPlaces';
 import { getStyles } from '../styles';
 import { ControlButtonContainer } from '../../ControlButtonsContainer';
-import { findPlacesFromQuery, getPlaceDetails } from '../../../../../lib/helpers/gmaps';
-import { extractGoogleGeocodeComponents } from '../../../../../lib/helpers/address';
 
 export function PlacesInput() {
   const {

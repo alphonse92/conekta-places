@@ -11,12 +11,12 @@ import classnames from 'classnames';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import mexicoValidatorSchema from 'conekta-places-lib/schemas/models/validators/mexico';
+import { getCountrySegmentsExtrator } from 'conekta-places-lib/helpers/address';
 
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
-import mexicoValidatorSchema from '../../../../lib/schemas/models/validators/mexico';
 import { ControlButtonContainer } from '../ControlButtonsContainer';
-import { getCountrySegmentsExtrator } from '../../../../lib/helpers/address';
 
 export default function CountryFormTemplate() {
   // Call the Form places hook to get useful functions
