@@ -1,3 +1,5 @@
+import { HttpError } from '../errors/HttpError';
+
 export class BaseController {
   constructor(Server) {
     this.Server = Server;
@@ -16,5 +18,19 @@ export class BaseController {
   }
   delete(req, res) {
     res.send('Method not implemented yet.');
+  }
+
+  async ensureOperation(req, res, errorPruneOp) {
+    try {
+      await errorPruneOp();
+    } catch (e) {
+      const { status = 500, message } = e;
+      if (e instanceof HttpError) {
+        res.status(status).send(message);
+      } else {
+        console.log(e);
+        res.send('Unexpected error');
+      }
+    }
   }
 }

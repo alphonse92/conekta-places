@@ -19,9 +19,11 @@ export class AddressController extends BaseController {
   }
 
   async saveAddress(req, res) {
-    const { body } = req;
-    // Do something to store  in database
-    res.send({ body, config: this.Server.config });
+    await super.ensureOperation(req, res, async () => {
+      const { body } = req;
+      const result = await this.manager.create(body);
+      res.send(result);
+    });
   }
 
   async updateAddress(req, res) {

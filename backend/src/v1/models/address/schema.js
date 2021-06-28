@@ -1,12 +1,13 @@
-export default (Server) => {
-  const mongo = Server.mongo.connection;
-  const { Schema } = mongo;
-  return {
-    name: 'Addresses',
-    schema: {
-      id: {
-        type: Schema.Types.ObjectId,
-      },
+export default () => ({
+  name: 'Addresses',
+  schema: {
+    countryId: {
+      type: 'String',
+      required: true,
     },
-  };
-};
+    segments: {
+      type: Object,
+      required: true,
+    },
+  },
+});

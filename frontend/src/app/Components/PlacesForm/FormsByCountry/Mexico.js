@@ -4,13 +4,14 @@ import classnames from 'classnames';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import mexicoValidatorSchema from 'conekta-places-lib/schemas/models/validators/mexico';
+import validationSchema from 'conekta-places-lib/schemas/models/validators/mexico';
 import { getCountrySegmentsExtrator } from 'conekta-places-lib/helpers/address';
 
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
 import { ControlButtonContainer } from '../ControlButtonsContainer';
 import { Loading } from '../Loading';
+import { InfoDialog } from '../Dialogs/InfoDialog';
 
 export default function MexicoForm() {
   const {
@@ -25,30 +26,43 @@ export default function MexicoForm() {
 
   const [initialValues, setInitialValues] = useState(extractedFeatures);
   const [isLoading, setIsLoading] = useState(false);
+  const [administrativeLevelExist, setAdministrativeLevelExist] = useState(false);
+  const [apiSaveResult, setApiSaveResult] = useState();
 
   useEffect(async () => {
+    if (!initialValues.codigoPostal) return;
+
     const service = getService();
     setIsLoading(true);
     const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode('mx', initialValues.codigoPostal);
     setIsLoading(false);
     if (administrativeLevelInformation) {
-      const newvalsx = { ...extractedFeatures, ...administrativeLevelInformation };
-      console.log(newvalsx);
-      setInitialValues(newvalsx);
+      const newInitValues = { ...extractedFeatures, ...administrativeLevelInformation };
+      setInitialValues(newInitValues);
+      setAdministrativeLevelExist(true);
     }
   }, []);
+
+  const onSubmit = async (values) => {
+    try {
+      const result = await submit(values);
+      setApiSaveResult({ result, ok: true });
+    } catch (e) {
+      setApiSaveResult({ ok: false });
+    }
+  };
 
   const classes = getStyles();
 
   const formik = useFormik({
     initialValues,
-    validationSchema: mexicoValidatorSchema,
-    onSubmit: submit,
+    onSubmit,
+    validationSchema,
     enableReinitialize: true,
   });
 
   const containErrors = Boolean(Object.keys(formik.errors).length);
-  const getInput = (id, label, isRequired) => (
+  const getInput = (id, label, isRequired, disabled) => (
     <div className={classnames(classes.formBodyRowContainer)}>
       <TextField
         fullWidth
@@ -57,6 +71,7 @@ export default function MexicoForm() {
         label={label}
         value={formik.values[id]}
         onChange={formik.handleChange}
+        disabled={disabled}
         error={formik.touched[id] && Boolean(formik.errors[id])}
         helperText={(
           (formik.touched[id] && formik.errors[id])
@@ -79,13 +94,24 @@ export default function MexicoForm() {
 
   return (
     <>
+      <InfoDialog
+        isOpen={apiSaveResult}
+        onAccept={exit}
+        title="Conekta Places"
+        text={(
+          apiSaveResult && apiSaveResult.result
+            ? getString('COUNTRY_FORM_SAVED_SUCCESS')
+            : getString('COUNTRY_FORM_SAVE_FAILED')
+        )}
+        acceptLabel={getString('STR_CONTINUE')}
+      />
       <p>{getString('FORM_BODY_TEXT')}</p>
       <form onSubmit={formik.handleSubmit}>
         <div className={classnames(classes.formBodyContainer)}>
-          {getInput('estado', 'Estado', true)}
-          {getInput('ciudad', 'Ciudad', true)}
-          {getInput('colonia', 'Colonia', true)}
-          {getInput('municipio', 'Delegación', true)}
+          {getInput('estado', 'Estado', true, administrativeLevelExist)}
+          {getInput('ciudad', 'Ciudad', true, administrativeLevelExist)}
+          {getInput('colonia', 'Colonia', true, administrativeLevelExist)}
+          {getInput('municipio', 'Delegación', true, administrativeLevelExist)}
           {getInput('calle', 'Calle', true)}
           {getInput('codigoPostal', 'Codigo Postal', true)}
           {getInput('numExt', 'Número exterior', true)}

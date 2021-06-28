@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
+  "module": "main.js",
   "scripts": {
     "test": "node node_modules/@babel/node/bin/babel-node.js ./node_modules/.bin/mocha mocha *.test.js",
     "start:dev": "node node_modules/@babel/node/bin/babel-node.js index.js"
