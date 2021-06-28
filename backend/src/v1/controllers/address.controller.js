@@ -1,33 +1,37 @@
 import { AddressManager } from '../mangers/address.manager';
+import { BaseController } from './base.controller';
 
-export const getSingleAddressController = Server => (req, res) => {
-  // Do something to store  in database
-  const addressManager = new AddressManager(Server);
-  res.send('ok');
-};
+export class AddressController extends BaseController {
 
-export const getAddressesController = Server => (req, res) => {
-  // Do something to store  in database
-  const addressManager = new AddressManager(Server);
-  res.send('ok');
-};
+  constructor(Server) {
+    super(Server);
+    this.manager = new AddressManager(this.Server);
+  }
 
-export const getSaveAddressController = Server => (req, res) => {
-  const { body } = req;
-  const addressManager = new AddressManager(Server);
-  // Do something to store  in database
-  res.send({ body, config: Server.config });
-};
+  async getAddress(req, res) {
+    // Do something to store  in database
+    res.send('ok');
+  }
 
-export const getUpdateAddressController = Server => (req, res) => {
-  const { body } = req;
-  const addressManager = new AddressManager(Server);
-  // Do something to store  in database
-  res.send(body);
-};
+  async getList(req, res) {
+    // Do something to store  in database
+    res.send('ok');
+  }
 
-export const getDeleteAddressController = Server => (req, res) => {
-  const addressManager = new AddressManager(Server);
-  // Do something to store  in database
-  res.send('ok');
-};
+  async saveAddress(req, res) {
+    const { body } = req;
+    // Do something to store  in database
+    res.send({ body, config: this.Server.config });
+  }
+
+  async updateAddress(req, res) {
+    const { body } = req;
+    // Do something to store  in database
+    res.send(body);
+  }
+
+  async deleteAddress(req, res) {
+    // Do something to store  in database
+    res.send('ok');
+  }
+}

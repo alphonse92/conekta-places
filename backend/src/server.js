@@ -1,12 +1,12 @@
 import express from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import connectToMongo from './database/mongo';
 import { loadModels as getMongoModels } from './v1/models';
 import createV1Routes from './v1/routes';
 import { getAllowAppIdMiddleware } from './v1/middlewares/security';
 
 let singletonAppInsance = null;
-
 export class Server {
 
   constructor(config) {
@@ -52,6 +52,7 @@ export class Server {
     this.app = express();
     this.expressServer = this.app.listen(this.getPort());
     this.app
+      .use(morgan('dev'))
       .use(express.urlencoded({ extended: true }))
       .use(express.json())
       .use(cors({ credentials: true, origin: true }));

@@ -1,20 +1,16 @@
 import { Router as expresRouter } from 'express';
-import {
-  getSingleAddressController,
-  getAddressesController,
-  getSaveAddressController,
-  getUpdateAddressController,
-  getDeleteAddressController,
-} from '../controllers/address.controller';
+import { AddressController } from '../controllers/address.controller';
 
-export default (Server) => {
+export const makeAddressRouter = (Server) => {
   const router = expresRouter();
 
-  router.get('/address/', getAddressesController(Server));
-  router.get('/address/:id', getSingleAddressController(Server));
-  router.post('/address/', getSaveAddressController(Server));
-  router.put('/address/', getUpdateAddressController(Server));
-  router.delete('/address/:id', getDeleteAddressController(Server));
+  const controller = new AddressController(Server);
+
+  router.get('/address/', controller.getAddress.bind(controller));
+  router.get('/address/:id', controller.getList.bind(controller));
+  router.post('/address/', controller.saveAddress.bind(controller));
+  router.put('/address/', controller.updateAddress.bind(controller));
+  router.delete('/address/:id', controller.deleteAddress.bind(controller));
 
   return router;
 };

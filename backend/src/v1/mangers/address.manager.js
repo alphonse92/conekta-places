@@ -1,26 +1,18 @@
-export class AddressManager {
+import { BaseManager } from './base.manager';
+
+export class AddressManager extends BaseManager {
   constructor(Server) {
-    this.Server = Server;
+    super(Server);
     this.model = this.Server.mongo.models.address;
   }
 
-  get(id) {
-
+  async create(data) {
+    const cleanedData = data;
+    return super.create(cleanedData);
   }
 
-  list(query, pagination) {
-
-  }
-
-  create(data) {
-
-  }
-
-  update(id, data) {
-
-  }
-
-  delete(id) {
-
+  async update(id, data) {
+    const cleanedData = data;
+    return super.update(cleanedData);
   }
 }

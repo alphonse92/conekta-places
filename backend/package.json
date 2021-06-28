@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "conekta-places-lib": "file:../lib",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -49,6 +50,7 @@
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-paginate": "^5.0.3",
     "mongoose-timestamp": "^0.6.0",
+    "morgan": "^1.10.0",
     "node-fetch": "^2.6.1"
   },
   "eslintConfig": {
@@ -91,6 +93,10 @@
       "no-throw-literal": "off",
       "no-plusplus": "off",
       "import/extensions": "off",
+      "react/jsx-filename-extension": "off",
+      "react/forbid-prop-types": "off",
+      "react/no-danger": "off",
+      "react/no-did-update-set-state": "off",
       "no-useless-escape": "off",
       "jsx-a11y/no-static-element-interactions": "warn",
       "class-methods-use-this": "off"
