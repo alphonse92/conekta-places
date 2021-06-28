@@ -2,12 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import v1Routes from './v1/routes';
 import { getAllowAppIdMiddleware } from './v1/middlewares/security';
+import connectToMongo from './database/mongo';
 
 let singletonAppInsance = null;
 
 export class Server {
   constructor(config) {
     this.config = config;
+    this.databases = {};
   }
 
   static getInstance(config = {}) {
@@ -39,9 +41,13 @@ export class Server {
     }
   }
 
+  getExpressServer() {
+    return this.expressServer;
+  }
+
   configureServer() {
     this.app = express();
-    this.app.listen(this.getPort());
+    this.expressServer = this.app.listen(this.getPort());
     this.app
       .use(express.urlencoded({ extended: true }))
       .use(express.json())
@@ -56,11 +62,40 @@ export class Server {
     this.app.use('/api', v1Routes);
   }
 
-  start() {
-    this.logStart();
-    this.printConfigEnvars();
-    this.configureServer();
-    this.protect();
-    this.loadRoutes();
+  async connectDatabase() {
+    this.databases.mongo = await connectToMongo(this.config);
+  }
+
+  async start() {
+    process.on('SIGTERM', this.shutdown.bind(this));
+    process.on('SIGINT', this.shutdown.bind(this));
+
+    try {
+      this.logStart();
+      this.printConfigEnvars();
+      this.configureServer();
+      this.protect();
+
+      await this.connectDatabase();
+
+      this.loadRoutes();
+    } catch (e) {
+      console.log(e)
+      // this.shutdown();
+    }
+  }
+
+  shutdown() {
+    console.log('Received kill signal, shutting down gracefully');
+
+    this.expressServer.close(() => {
+      console.log('Closed out remaining connections');
+      process.exit(0);
+    });
+
+    setTimeout(() => {
+      console.error('Could not close connections in time, forcefully shutting down');
+      process.exit(1);
+    }, 10000);
   }
 }
