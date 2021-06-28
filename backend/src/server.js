@@ -3,13 +3,14 @@ import cors from 'cors';
 import v1Routes from './v1/routes';
 import { getAllowAppIdMiddleware } from './v1/middlewares/security';
 import connectToMongo from './database/mongo';
+import { loadModels as getMongoModels } from './v1/models';
 
 let singletonAppInsance = null;
 
 export class Server {
   constructor(config) {
     this.config = config;
-    this.databases = {};
+    this.mongo = {};
   }
 
   static getInstance(config = {}) {
@@ -62,8 +63,16 @@ export class Server {
     this.app.use('/api', v1Routes);
   }
 
+  async startMongoAndMongoose() {
+    const connection = await connectToMongo(this.config);
+    this.mongo.connection = connection;
+    console.log('-> Connected to mongo.');
+    this.mongo.models = getMongoModels(this);
+    console.log('-> Mongo models loaded');
+  }
+
   async connectDatabase() {
-    this.databases.mongo = await connectToMongo(this.config);
+    await this.startMongoAndMongoose();
   }
 
   async start() {
@@ -80,8 +89,8 @@ export class Server {
 
       this.loadRoutes();
     } catch (e) {
-      console.log(e)
-      // this.shutdown();
+      console.log(e);
+      this.shutdown();
     }
   }
 

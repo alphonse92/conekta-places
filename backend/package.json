@@ -46,6 +46,9 @@
     "express": "^4.17.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.12.15",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-timestamp": "^0.6.0",
     "node-fetch": "^2.6.1"
   },
   "eslintConfig": {
