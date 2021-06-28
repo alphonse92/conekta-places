@@ -8,9 +8,11 @@ import { getAllowAppIdMiddleware } from './v1/middlewares/security';
 let singletonAppInsance = null;
 
 export class Server {
+
   constructor(config) {
     this.config = config;
     this.mongo = {};
+    this.status = Server.STATUSES.NOT_STARTED;
   }
 
   static getInstance(config = {}) {
@@ -88,6 +90,8 @@ export class Server {
       await this.connectDatabase();
 
       this.loadRoutes();
+
+      this.status = this.status = Server.STATUSES.RUNNING;
     } catch (e) {
       console.log(e);
       this.shutdown();
@@ -108,3 +112,8 @@ export class Server {
     }, 10000);
   }
 }
+
+Server.STATUSES = {
+  RUNNING: 'RUNNING',
+  NOT_STARTED: 'NOT_STARTED',
+};
