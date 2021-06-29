@@ -1,3 +1,5 @@
+import { getAvailableCountries } from 'conekta-places-lib/dist/helpers/country';
+
 import { CountryManager } from '../mangers/country.manager';
 import { AddressManager } from '../mangers/address.manager';
 import { BaseController } from './base.controller';
@@ -12,7 +14,8 @@ export class CountryController extends BaseController {
   }
 
   getAvailable(req, res) {
-    res.send(this.manager.getAvailable());
+    const availableCountries = getAvailableCountries();
+    res.send(availableCountries);
   }
 
   async getPostalCodeInfo(req, res) {
