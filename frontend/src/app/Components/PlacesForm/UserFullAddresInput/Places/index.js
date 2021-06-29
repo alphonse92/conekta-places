@@ -10,14 +10,16 @@ import { extractGoogleGeocodeComponents } from 'conekta-places-lib/dist/helpers/
 import { useFormPlaces } from '../../Context/useFormPlaces';
 import { getStyles } from '../styles';
 import { ControlButtonContainer } from '../../ControlButtonsContainer';
+import { useLanguage } from '../../../../root/LanguageProvider/use';
 
 export function PlacesInput() {
   const {
-    getString,
     exit,
     googleAPIKey,
     setAddressComponents,
   } = useFormPlaces();
+
+  const { getString } = useLanguage();
 
   const [options, setOptions] = useState([]);
   const [businessName, setBusinessName] = useState();

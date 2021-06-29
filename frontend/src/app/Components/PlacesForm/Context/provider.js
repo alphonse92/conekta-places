@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { getLanguageSelector } from 'conekta-places-lib/dist/helpers/language';
 import PropTypes from 'prop-types';
 import AppContext from './context';
 import { useService } from '../../../root/ServiceProvider/use';
@@ -20,8 +19,6 @@ export const FormPlacesProvider = ({
   const [googleAPIKey] = useState(googleApiKey);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getString = getLanguageSelector(selectedLang);
-
   const exit = (graceful = true) => {
     setFullAddress(undefined);
     setAddressComponents(undefined);
@@ -41,7 +38,6 @@ export const FormPlacesProvider = ({
     addressComponents,
     isLoading,
     setLang,
-    getString,
     setFullAddress,
     exit,
     setAddressComponents,

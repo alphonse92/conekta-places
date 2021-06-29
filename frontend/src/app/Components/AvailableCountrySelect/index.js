@@ -1,40 +1,55 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+import { useService } from '../../root/ServiceProvider/use';
+import { useLanguage } from '../../root/LanguageProvider/use';
 
+export const AvailableCountrySelect = ({
+  value: selectedValue,
+  onSelect,
+}) => {
+  const [options, setOptions] = useState([]);
+  const { getString } = useLanguage();
 
-export const AvailableCountrySelect = () => {
-  const [options, setOptions] = useState();
+  const { conekta: service } = useService();
 
   useEffect(async () => {
-    const service = createService();
     const mapOfCountries = await service.getAvailableCountries();
     const arrayOfCountries = Object.keys(mapOfCountries)
       .reduce(
-        (list, id) => [...list, { label: arrayOfCountries[id], id }],
+        (list, id) => [...list, { label: mapOfCountries[id], id }],
         [],
       );
     setOptions(arrayOfCountries);
+    onSelect(arrayOfCountries[0].id);
   }, []);
+
+  const handleChange = (event) => {
+    onSelect(event.target.value);
+  };
 
   return (
     <FormControl>
-      <InputLabel id="demo-simple-select-label">Age</InputLabel>
+      <InputLabel id="demo-simple-select-label">{getString('AVAILABLE_COUNTRY_SELECT_LABEL')}</InputLabel>
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
-        value={age}
+        value={selectedValue}
         onChange={handleChange}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {options.map(({ id: value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
       </Select>
     </FormControl>
-  )
+  );
+};
 
+AvailableCountrySelect.defaultProps = {
+  value: undefined,
+};
 
+AvailableCountrySelect.propTypes = {
+  value: PropTypes.number,
+  onSelect: PropTypes.func.isRequired,
 };

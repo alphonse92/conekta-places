@@ -17,12 +17,14 @@ import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/addr
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
 import { ControlButtonContainer } from '../ControlButtonsContainer';
+import { useLanguage } from '../../../root/LanguageProvider/use';
 
 export default function CountryFormTemplate() {
+  // call the hook for lang provider features
+  const { getString } = useLanguage();
   // Call the Form places hook to get useful functions
   const {
     addressComponents = {},
-    getString,
     submit,
     exit,
   } = useFormPlaces();

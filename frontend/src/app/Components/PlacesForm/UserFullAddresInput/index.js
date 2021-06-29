@@ -3,15 +3,13 @@ import classnames from 'classnames';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import { useFormPlaces } from '../Context/useFormPlaces';
 import { GeocodeAddressInput } from './Geocode';
 import { getStyles } from './styles';
 import { PlacesInput } from './Places';
+import { useLanguage } from '../../../root/LanguageProvider/use';
 
 function UserFullAddresInputComponent() {
-  const {
-    getString,
-  } = useFormPlaces();
+  const { getString } = useLanguage();
 
   const classes = getStyles();
 

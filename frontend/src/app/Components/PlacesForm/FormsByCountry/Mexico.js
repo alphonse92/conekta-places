@@ -13,14 +13,16 @@ import { ControlButtonContainer } from '../ControlButtonsContainer';
 import { Loading } from '../Loading';
 import { InfoDialog } from '../Dialogs/InfoDialog';
 import { useService } from '../../../root/ServiceProvider/use';
+import { useLanguage } from '../../../root/LanguageProvider/use';
 
 export default function MexicoForm() {
   const {
     addressComponents = {},
-    getString,
     submit,
     exit,
   } = useFormPlaces();
+
+  const { getString } = useLanguage();
 
   const { conekta: service } = useService();
 

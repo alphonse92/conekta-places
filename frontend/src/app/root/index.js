@@ -5,6 +5,7 @@ import {
 
 import App from './App';
 import { ConfigurationProvider } from './ConfigurationProvider/provider';
+import { LanguageProvider } from './LanguageProvider/provider';
 import { ServiceProvider } from './ServiceProvider/provider';
 /**
  * This Component acts as our application container. In order to show how to use the PlacesForm component and Table
@@ -15,9 +16,11 @@ function Root() {
   return (
     <Router>
       <ConfigurationProvider>
-        <ServiceProvider>
-          <App />
-        </ServiceProvider>
+        <LanguageProvider>
+          <ServiceProvider>
+            <App />
+          </ServiceProvider>
+        </LanguageProvider>
       </ConfigurationProvider>
     </Router>
   );

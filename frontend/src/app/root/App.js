@@ -9,6 +9,7 @@ import {
 import { getStyles } from './App.styles';
 import PlacesForm from '../Components/PlacesForm';
 import { GetStarted } from '../Components/GetStarted';
+import { PlacesPage } from '../Components/PlacesPage';
 
 /**
  * This Component acts as our application container. In order to show how to use the PlacesForm component and Table
@@ -29,8 +30,8 @@ function App() {
             <Route path="/register">
               <PlacesForm onSubmit={onSubmit} />
             </Route>
-            <Route path="/listing">
-              <p>the table</p>
+            <Route path="/list">
+              <PlacesPage />
             </Route>
             <Route path="/">
               <GetStarted onStart={onStart} />

@@ -7,13 +7,12 @@ import Button from '@material-ui/core/Button';
 
 import { getStyles } from './styles';
 import { useFormPlaces } from '../Context/useFormPlaces';
+import { useLanguage } from '../../../root/LanguageProvider/use';
 
 export const NotAvailableInYourRegion = () => {
   const classes = getStyles();
-  const {
-    getString,
-    exit,
-  } = useFormPlaces();
+  const { exit } = useFormPlaces();
+  const { getString } = useLanguage();
 
   return (
     <div className={classnames(classes.errorContainer)}>
