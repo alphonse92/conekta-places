@@ -21,9 +21,12 @@ export class BaseManager {
     console.log('Method not implemented yet', arrayOfId);
   }
 
-  async list(query, pagination) {
+  async list(query, { page = 1, limit = 0 } = {}) {
     this.checkByInit();
-    console.log('Method not implemented yet', query, pagination);
+    return this.model.paginate(
+      query,
+      { page, limit }
+    );
   }
 
   async create(data) {

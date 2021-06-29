@@ -6,11 +6,7 @@ export default (Server) => {
 
   const controller = new AddressController(Server);
 
-  router.get('/address/', controller.getAddress.bind(controller));
-  router.get('/address/:id', controller.getList.bind(controller));
   router.post('/address/', controller.saveAddress.bind(controller));
-  router.put('/address/', controller.updateAddress.bind(controller));
-  router.delete('/address/:id', controller.deleteAddress.bind(controller));
 
   return router;
 };

@@ -13,6 +13,11 @@ export class AddressManager extends BaseManager {
     this.model = this.Server.mongo.models.address;
   }
 
+  async list({ countryId }, pagination) {
+    const list = await super.list({ countryId }, pagination);
+    return list;
+  }
+
   async processRequestBody(data) {
     const { countryId, ...values } = data;
     if (!countryId) throw new CountryIsRequired();
