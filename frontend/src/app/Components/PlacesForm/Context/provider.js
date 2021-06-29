@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import * as LANG from 'conekta-places-lib/dist/lang';
+import { Lang } from 'conekta-places-lib';
 import PropTypes from 'prop-types';
 import AppContext from './context';
 import { createService } from '../../../../services/index.js';
 
+console.log(Lang);
 export const FormPlacesProvider = ({
   children,
   language,
@@ -21,7 +22,10 @@ export const FormPlacesProvider = ({
 
   const startUserPlacesFlow = () => setUserStarted(true);
 
-  const getString = (str, def = 'No string found') => LANG[selectedLang][str] || def;
+  console.log(Lang.makeLangSelector);
+  const { makeLangSelector, es, en } = Lang;
+  const dict = { es, en };
+  const getString = makeLangSelector(dict, selectedLang);
 
   const exit = () => {
     setUserStarted(false);
@@ -66,7 +70,7 @@ export const FormPlacesProvider = ({
 };
 
 FormPlacesProvider.defaultProps = {
-  language: LANG.DEFAULT,
+  language: 'en',
   googleAPIKey: undefined,
 };
 

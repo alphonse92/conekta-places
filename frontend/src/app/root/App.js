@@ -17,7 +17,7 @@ function App() {
       <div className={classnames(classes.container)}>
         <div className={classnames(classes.formContainer)}>
           <PlacesForm
-            language={document.documentElement.lang}
+            language={process.env.REACT_APP_ENV_LANG || document.documentElement.lang}
             googleAPIKey={process.env.REACT_APP_ENV_GOOGLE_API_KEY}
             apiUrl={process.env.REACT_APP_ENV_PLACES_FORM_SERVICE_API_URL}
             appId={process.env.REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID}
