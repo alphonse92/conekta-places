@@ -2,21 +2,22 @@ import React, { useState } from 'react';
 import { getLanguageSelector } from 'conekta-places-lib/dist/helpers/language';
 import PropTypes from 'prop-types';
 import AppContext from './context';
-import { createService } from '../../../../services/index.js';
+import { useService } from '../../../root/ServiceProvider/use';
+import { useConfiguration } from '../../../root/ConfigurationProvider/use';
 
 export const FormPlacesProvider = ({
   children,
-  language,
-  googleAPIKey: gApiK,
-  apiUrl,
-  appId,
-  serviceName,
   onSubmit,
 }) => {
+  const {
+    REACT_APP_ENV_GOOGLE_API_KEY: googleApiKey,
+    REACT_APP_ENV_LANG: language,
+  } = useConfiguration();
+
   const [fullAddress, setFullAddress] = useState();
   const [selectedLang, setLang] = useState(language);
   const [addressComponents, setAddressComponents] = useState();
-  const [googleAPIKey] = useState(gApiK);
+  const [googleAPIKey] = useState(googleApiKey);
   const [isLoading, setIsLoading] = useState(false);
 
   const getString = getLanguageSelector(selectedLang);
@@ -27,13 +28,8 @@ export const FormPlacesProvider = ({
     onSubmit(graceful);
   };
 
-  const getService = () => createService(serviceName, {
-    apiUrl,
-    appId,
-  });
-
   const submit = async (values) => {
-    const service = getService();
+    const { conekta: service } = useService();
     const result = await service.saveAddress(values);
     return result;
   };
@@ -51,7 +47,6 @@ export const FormPlacesProvider = ({
     setAddressComponents,
     setIsLoading,
     submit,
-    getService,
   };
 
   return React.createElement(
@@ -61,10 +56,7 @@ export const FormPlacesProvider = ({
   );
 };
 
-FormPlacesProvider.defaultProps = {
-  language: 'en',
-  googleAPIKey: undefined,
-};
+FormPlacesProvider.defaultProps = {};
 
 FormPlacesProvider.propTypes = {
   children: PropTypes.oneOfType([
@@ -72,11 +64,6 @@ FormPlacesProvider.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]).isRequired,
-  language: PropTypes.string,
-  googleAPIKey: PropTypes.string,
-  apiUrl: PropTypes.string.isRequired,
-  appId: PropTypes.string.isRequired,
-  serviceName: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

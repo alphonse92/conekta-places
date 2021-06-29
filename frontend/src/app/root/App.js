@@ -18,36 +18,22 @@ import { GetStarted } from '../Components/GetStarted';
 function App() {
   const history = useHistory();
   const classes = getStyles();
-  const language = process.env.REACT_APP_ENV_LANG || document.documentElement.lang;
-  const onStart = () => {
-    history.push('/register');
-  };
-  const onSubmit = () => {
-    history.push('/');
-  };
+  const onStart = () => history.push('/register');
+  const onSubmit = () => history.push('/');
+
   return (
     <div className={classnames(classes.root)}>
       <div className={classnames(classes.container)}>
         <div className={classnames(classes.formContainer)}>
           <Switch>
             <Route path="/register">
-              <PlacesForm
-                language={language}
-                googleAPIKey={process.env.REACT_APP_ENV_GOOGLE_API_KEY}
-                apiUrl={process.env.REACT_APP_ENV_PLACES_FORM_SERVICE_API_URL}
-                appId={process.env.REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID}
-                serviceName={process.env.REACT_APP_ENV_SERVICE_NAME}
-                onSubmit={onSubmit}
-              />
+              <PlacesForm onSubmit={onSubmit} />
             </Route>
             <Route path="/listing">
               <p>the table</p>
             </Route>
             <Route path="/">
-              <GetStarted
-                language={language}
-                onStart={onStart}
-              />
+              <GetStarted onStart={onStart} />
             </Route>
           </Switch>
 

@@ -12,6 +12,7 @@ import { getStyles } from './styles';
 import { ControlButtonContainer } from '../ControlButtonsContainer';
 import { Loading } from '../Loading';
 import { InfoDialog } from '../Dialogs/InfoDialog';
+import { useService } from '../../../root/ServiceProvider/use';
 
 export default function MexicoForm() {
   const {
@@ -19,8 +20,9 @@ export default function MexicoForm() {
     getString,
     submit,
     exit,
-    getService,
   } = useFormPlaces();
+
+  const { conekta: service } = useService();
 
   const extractedFeatures = getCountrySegmentsExtrator('mx')(addressComponents);
 
@@ -33,8 +35,6 @@ export default function MexicoForm() {
 
   useEffect(async () => {
     if (!initialValues.codigoPostal) return;
-
-    const service = getService();
     setIsLoading(true);
     const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode('mx', initialValues.codigoPostal);
     setIsLoading(false);

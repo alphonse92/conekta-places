@@ -2,11 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import { getLanguageSelector } from 'conekta-places-lib/dist/helpers/language';
+import { useConfiguration } from '../../root/ConfigurationProvider/use';
 
 export const GetStarted = ({
-  language,
   onStart,
 }) => {
+  const {
+    REACT_APP_ENV_LANG: language,
+  } = useConfiguration();
+
   const getString = getLanguageSelector(language);
   return (
     <>
@@ -24,10 +28,8 @@ export const GetStarted = ({
 };
 
 GetStarted.defaultProps = {
-  language: 'en',
 };
 
 GetStarted.propTypes = {
-  language: PropTypes.string,
   onStart: PropTypes.func.isRequired,
 };
