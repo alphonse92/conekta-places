@@ -4,8 +4,8 @@ import _get from 'lodash/get';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { findPlacesFromQuery, getPlaceDetails } from 'conekta-places-lib/helpers/gmaps';
-import { extractGoogleGeocodeComponents } from 'conekta-places-lib/helpers/address';
+import { findPlacesFromQuery, getPlaceDetails } from 'conekta-places-lib/dist/helpers/gmaps';
+import { extractGoogleGeocodeComponents } from 'conekta-places-lib/dist/helpers/address';
 
 import { useFormPlaces } from '../../Context/useFormPlaces';
 import { getStyles } from '../styles';

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as LANG from 'conekta-places-lib/lang';
+import * as LANG from 'conekta-places-lib/dist/lang';
 import PropTypes from 'prop-types';
 import AppContext from './context';
 import { createService } from '../../../../services/index.js';

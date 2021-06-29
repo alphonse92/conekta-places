@@ -11,8 +11,8 @@ import classnames from 'classnames';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import mexicoValidatorSchema from 'conekta-places-lib/schemas/models/validators/mexico';
-import { getCountrySegmentsExtrator } from 'conekta-places-lib/helpers/address';
+import mexicoValidatorSchema from 'conekta-places-lib/dist/schemas/models/validators/mexico';
+import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/address';
 
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
