@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import { createLanguageSelector } from '../../../utils/lang';
+import { getLanguageSelector } from 'conekta-places-lib/dist/helpers/language';
 
 export const GetStarted = ({
   language,
   onStart,
 }) => {
-  const getString = createLanguageSelector(language);
+  const getString = getLanguageSelector(language);
   return (
     <>
       <img src="https://s3-conektacdn-staging.s3.amazonaws.com/cpanel/statics/assets/img/conekta-logo-blue-full.svg" alt="logo" />
