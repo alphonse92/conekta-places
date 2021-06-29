@@ -1,6 +1,6 @@
 import _pick from 'lodash/pick';
-import { getCountrySegmentsExtrator } from 'conekta-places-lib/helpers/address';
-import addressFieldValidatorByCountry from 'conekta-places-lib/schemas/models/validators';
+import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/address';
+import addressFieldValidatorByCountry from 'conekta-places-lib/dist/schemas/models/validators';
 
 import { BaseManager } from './base.manager';
 import { CountryAddressNotSupported } from '../errors/CountryAddressNotSupported';

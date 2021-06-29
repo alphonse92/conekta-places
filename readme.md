@@ -5,8 +5,9 @@ This app allows to mexican users to register their address perfect as posible.
 # Requeriments
 
 1. docker
-2. node and npm
-3. If you dont have docker, then you will need a mongo database.
+2. node v10.19.0 or greater
+3. npm
+4. If you dont have docker, then you will need a mongo database.
 
 # Configuration
 
