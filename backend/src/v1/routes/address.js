@@ -1,7 +1,7 @@
 import { Router as expresRouter } from 'express';
 import { AddressController } from '../controllers/address.controller';
 
-export const makeAddressRouter = (Server) => {
+export default (Server) => {
   const router = expresRouter();
 
   const controller = new AddressController(Server);

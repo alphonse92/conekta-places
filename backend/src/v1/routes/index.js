@@ -1,17 +1,14 @@
 import { Router as expresRouter } from 'express';
-import { makeHealthRouter } from './health';
-import { makeInfoRouter } from './info';
-import { makeAddressRouter } from './address';
+import makeHealthRouter from './health';
+import makeAddressRouter from './address';
+import makeCountryController from './country';
 
 export default (Server) => {
   const root = expresRouter();
 
   root.use('/v1', makeHealthRouter(Server));
-  root.use('/v1', makeInfoRouter(Server));
   root.use('/v1', makeAddressRouter(Server));
-
-  // append your custom routers for the version 1 of your api
-  // mainRouter.use('/v1', infoRouter);
+  root.use('/v1', makeCountryController(Server));
 
   return root;
 };

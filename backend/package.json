@@ -80,6 +80,8 @@
       "no-underscore-dangle": "off",
       "import/no-dynamic-require": "off",
       "import/prefer-default-export": "off",
+      "import/no-named-as-default-member": "off",
+      "import/no-named-as-default": "off",
       "generator-star-spacing": "off",
       "import/no-extraneous-dependencies": "off",
       "react/no-unused-prop-types": "off",
