@@ -29,6 +29,8 @@ export default function MexicoForm() {
   const [administrativeLevelExist, setAdministrativeLevelExist] = useState(false);
   const [apiSaveResult, setApiSaveResult] = useState();
 
+  const registerSuccessfuly = apiSaveResult && apiSaveResult.result;
+
   useEffect(async () => {
     if (!initialValues.codigoPostal) return;
 
@@ -86,6 +88,13 @@ export default function MexicoForm() {
     </div>
   );
 
+  const onAccept = () => {
+    if (registerSuccessfuly) {
+      exit(true);
+    }
+    setApiSaveResult(undefined);
+  };
+
   if (isLoading) {
     return (
       <Loading />
@@ -96,10 +105,10 @@ export default function MexicoForm() {
     <>
       <InfoDialog
         isOpen={apiSaveResult}
-        onAccept={exit}
+        onAccept={onAccept}
         title="Conekta Places"
         text={(
-          apiSaveResult && apiSaveResult.result
+          registerSuccessfuly
             ? getString('COUNTRY_FORM_SAVED_SUCCESS')
             : getString('COUNTRY_FORM_SAVE_FAILED')
         )}

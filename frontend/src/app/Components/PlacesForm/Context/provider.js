@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import AppContext from './context';
 import { createService } from '../../../../services/index.js';
 
-console.log(Lang);
 export const FormPlacesProvider = ({
   children,
   language,
@@ -12,25 +11,22 @@ export const FormPlacesProvider = ({
   apiUrl,
   appId,
   serviceName,
+  onSubmit,
 }) => {
-  const [userHasStarted, setUserStarted] = useState(false);
   const [fullAddress, setFullAddress] = useState();
   const [selectedLang, setLang] = useState(language);
   const [addressComponents, setAddressComponents] = useState();
   const [googleAPIKey] = useState(gApiK);
   const [isLoading, setIsLoading] = useState(false);
 
-  const startUserPlacesFlow = () => setUserStarted(true);
-
-  console.log(Lang.makeLangSelector);
   const { makeLangSelector, es, en } = Lang;
   const dict = { es, en };
   const getString = makeLangSelector(dict, selectedLang);
 
-  const exit = () => {
-    setUserStarted(false);
+  const exit = (graceful = true) => {
     setFullAddress(undefined);
     setAddressComponents(undefined);
+    onSubmit(graceful);
   };
 
   const getService = () => createService(serviceName, {
@@ -45,7 +41,6 @@ export const FormPlacesProvider = ({
   };
 
   const contextValue = {
-    userHasStarted,
     lang: selectedLang,
     fullAddress,
     googleAPIKey,
@@ -53,7 +48,6 @@ export const FormPlacesProvider = ({
     isLoading,
     setLang,
     getString,
-    startUserPlacesFlow,
     setFullAddress,
     exit,
     setAddressComponents,
@@ -85,6 +79,7 @@ FormPlacesProvider.propTypes = {
   apiUrl: PropTypes.string.isRequired,
   appId: PropTypes.string.isRequired,
   serviceName: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 FormPlacesProvider.displayName = 'AppProvider';

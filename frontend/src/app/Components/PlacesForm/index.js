@@ -17,6 +17,7 @@ export default function PlacesFormRoot({
   apiUrl,
   appId,
   serviceName,
+  onSubmit,
 }) {
   const classes = getStyles();
   return (
@@ -27,6 +28,7 @@ export default function PlacesFormRoot({
         apiUrl={apiUrl}
         appId={appId}
         serviceName={serviceName}
+        onSubmit={onSubmit}
       >
         <FormContainer />
       </FormPlacesProvider>
@@ -40,6 +42,7 @@ PlacesFormRoot.propTypes = {
   apiUrl: PropTypes.string.isRequired,
   appId: PropTypes.string.isRequired,
   serviceName: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 PlacesFormRoot.defaultProps = {

@@ -5,7 +5,6 @@ export const useFormPlaces = () => {
   const context = useContext(AppContext);
   const {
     googleAPIKey,
-    userHasStarted,
     lang,
     setLang,
     getString,
@@ -24,7 +23,6 @@ export const useFormPlaces = () => {
   } = context;
   return {
     googleAPIKey,
-    userHasStarted,
     lang,
     setLang,
     getString,
