@@ -11,6 +11,18 @@ export const getStyles = makeStyles((theme) => ({
     '& h1': {
       fontSize: theme.fontSize.h1,
     },
+    '& h2': {
+      fontSize: theme.fontSize.h2,
+    },
+    '& h3': {
+      fontSize: theme.fontSize.h3,
+    },
+    '& h4': {
+      fontSize: theme.fontSize.h4,
+    },
+    '& h5': {
+      fontSize: theme.fontSize.h5,
+    },
     '& a': {
       textDecoration: 'none',
     },

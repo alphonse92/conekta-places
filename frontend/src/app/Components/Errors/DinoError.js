@@ -30,7 +30,7 @@ export const DinoError = ({
         </video>
       </div>
       <div className={classnames(classes.controls)}>
-        <p>{text}</p>
+        <h2>{text}</h2>
         <Button
           variant="contained"
           color="primary"
