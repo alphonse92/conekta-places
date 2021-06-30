@@ -72,7 +72,7 @@ export const FormBody = () => {
         )}
         acceptLabel={getString('STR_CONTINUE')}
       />
-      <p>{getString('FORM_BODY_TEXT')}</p>
+      <h1>{getString('FORM_BODY_TEXT')}</h1>
       <div className={classnames(classes.root)}>
         <CountryForm
           formId={formId}

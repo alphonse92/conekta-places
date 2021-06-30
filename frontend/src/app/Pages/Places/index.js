@@ -17,6 +17,7 @@ export const Places = () => {
 
   const [countryId, setCountryId] = useState();
 
+  const onBack = () => history.push('/');
   const onPreview = (id) => history.push(`/address/${id}`);
   const onDelete = async (id) => service.deleteAddress(id);
 
@@ -32,6 +33,7 @@ export const Places = () => {
         <div className={classnames(classes.tableContainer)}>
           <PlacesTable
             countryId={countryId}
+            onBack={onBack}
             onPreview={onPreview}
             onDelete={onDelete}
           />

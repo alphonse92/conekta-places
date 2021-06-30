@@ -8,6 +8,12 @@ export const getStyles = makeStyles((theme) => ({
     fontFamily: 'roboto, sans-serif',
     color: theme.palette.base.white,
     backgroundColor: theme.palette.primary.color,
+    '& h1': {
+      fontSize: theme.fontSize.h1,
+    },
+    '& a': {
+      textDecoration: 'none',
+    },
   },
   container: {
     minHeight: '100vh',
@@ -15,7 +21,7 @@ export const getStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: 'calc(10px + 2vmin)',
+    fontSize: theme.fontSize.normal,
   },
   formContainer: {
     minWidth: '50%',

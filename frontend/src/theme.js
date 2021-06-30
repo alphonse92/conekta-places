@@ -7,6 +7,18 @@ export default createMuiTheme({
     double: '26px',
     extra: '52px',
   },
+  fontSize: {
+    tiny: '10px',
+    small: '11px',
+    normal: '12px',
+    extra: '14px',
+    big: '16px',
+    h1: '48px',
+    h2: '24px',
+    h3: '18px',
+    h4: '16px',
+    h5: '14px',
+  },
   breakpoints: {
     values: {
       xs: 0,

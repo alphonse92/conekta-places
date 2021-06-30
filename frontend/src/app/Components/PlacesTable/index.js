@@ -22,11 +22,13 @@ import { getStyles } from './styles';
 import { useService } from '../../root/ServiceProvider/use';
 import { useLanguage } from '../../root/LanguageProvider/use';
 import { useConfiguration } from '../../root/ConfigurationProvider/use';
+import { DinoError } from '../Errors/DinoError';
 
 export const PlacesTable = ({
   countryId,
   onDelete,
   onPreview,
+  onBack,
 }) => {
   const [addresses, setAddresses] = useState([]);
   const [pagination, setPagination] = useState({});
@@ -70,7 +72,15 @@ export const PlacesTable = ({
   }, [countryId]);
 
   if (fetching) return <Loading />;
-  if (!addresses.length) return <p>{getString('PLACES_TABLE_NO_RECORD')}</p>;
+  if (!addresses.length) {
+    return (
+      <DinoError
+        onContinue={onBack}
+        text={getString('PLACES_TABLE_NO_RECORD')}
+        label={getString('STR_CONTINUE')}
+      />
+    );
+  }
 
   return (
     <div className={classnames(classes.tableContainer)}>
@@ -115,4 +125,5 @@ PlacesTable.propTypes = {
   countryId: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
   onPreview: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
