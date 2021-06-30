@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sh reset.
+sh reset.sh
 
 cd lib
 npm install
