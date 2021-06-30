@@ -9,6 +9,7 @@ import { InfoDialog } from './Dialogs/InfoDialog';
 import { NotAvailableInYourRegion } from './Errors/NoAvailableInYourRegion';
 import { getStyles } from './styles';
 import { ControlButtonContainer } from './ControlButtonsContainer';
+import { useConfiguration } from '../../root/ConfigurationProvider/use';
 
 export const FormBody = () => {
   const {
@@ -16,6 +17,8 @@ export const FormBody = () => {
     exit,
     submit,
   } = useFormPlaces();
+
+  const { isCountryAvailable } = useConfiguration();
 
   const classes = getStyles();
 
@@ -26,7 +29,7 @@ export const FormBody = () => {
   const { country } = addressComponents;
   const registerSuccessfuly = apiSaveResult && apiSaveResult.result;
 
-  const countryNotAvailableComponent = <NotAvailableInYourRegion onContinue={exit} />;
+  if (!isCountryAvailable(country.id)) return <NotAvailableInYourRegion onContinue={exit} />;
 
   const onSubmit = async (values) => {
     try {
@@ -50,7 +53,7 @@ export const FormBody = () => {
   return (
     <>
       <InfoDialog
-        isOpen={apiSaveResult}
+        isOpen={Boolean(apiSaveResult)}
         onAccept={onAccept}
         title="Conekta Places"
         text={(
@@ -67,7 +70,6 @@ export const FormBody = () => {
           addressComponents={addressComponents}
           countryId={country.id}
           onSubmit={onSubmit}
-          countryNotAvailableComponent={countryNotAvailableComponent}
         />
         <ControlButtonContainer>
           <Button variant="contained" color="primary" type="submit" form={formId}>

@@ -3,13 +3,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MexicoForm from './Mexico';
+import { requireSegmentsOrComponents } from './helper';
 
 export function CountryForm({
   formId,
   countryId,
   onSubmit,
   addressComponents,
-  countryNotAvailableComponent,
+  segments,
 }) {
   const countryFormMap = {
     mx: MexicoForm,
@@ -17,23 +18,25 @@ export function CountryForm({
 
   const CountryFormComponent = countryFormMap[countryId.toLowerCase()];
 
-  if (!CountryFormComponent) return countryNotAvailableComponent;
-
   return (
     <CountryFormComponent
       formId={formId}
       onSubmit={onSubmit}
       addressComponents={addressComponents}
+      segments={segments}
     />
   );
 }
 
 CountryForm.displayName = 'CountryForm';
-CountryForm.defaultProps = {};
+CountryForm.defaultProps = {
+  segments: undefined,
+  addressComponents: undefined,
+};
 CountryForm.propTypes = {
   formId: PropTypes.string.isRequired,
   countryId: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  addressComponents: PropTypes.object.isRequired,
-  countryNotAvailableComponent: PropTypes.object.isRequired,
+  segments: requireSegmentsOrComponents,
+  addressComponents: requireSegmentsOrComponents,
 };

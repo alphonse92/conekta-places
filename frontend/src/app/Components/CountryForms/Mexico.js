@@ -10,6 +10,7 @@ import { getStyles } from './styles';
 import { Loading } from '../Loading';
 import { useLanguage } from '../../root/LanguageProvider/use';
 import { useService } from '../../root/ServiceProvider/use';
+import { requireSegmentsOrComponents } from './helper';
 
 export default function MexicoForm({ formId, onSubmit, addressComponents }) {
   const MexicoClass = getClassAddressByCountry('mx');
@@ -84,9 +85,13 @@ export default function MexicoForm({ formId, onSubmit, addressComponents }) {
 }
 
 MexicoForm.displayName = 'MexicoForm';
-MexicoForm.defaultProps = {};
+MexicoForm.defaultProps = {
+  segments: undefined,
+  addressComponents: undefined,
+};
 MexicoForm.propTypes = {
   formId: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  addressComponents: PropTypes.object.isRequired,
+  segments: requireSegmentsOrComponents,
+  addressComponents: requireSegmentsOrComponents,
 };

@@ -24,7 +24,7 @@ export const ConfigurationProvider = ({
     },
   };
 
-  const isCountryAvailable = (countryId) => Boolean(getAvailableCountries()[countryId]);
+  const isCountryAvailable = (countryId) => Boolean(getAvailableCountries()[countryId.toLowerCase()]);
 
   const contextValue = {
     REACT_APP_ENV,
