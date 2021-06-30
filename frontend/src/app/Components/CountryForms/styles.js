@@ -13,4 +13,8 @@ export const getStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     marginBottom: theme.margin.double,
   },
+  inputContainer: {
+    width: '100%',
+    margin: theme.margin.default,
+  },
 }));

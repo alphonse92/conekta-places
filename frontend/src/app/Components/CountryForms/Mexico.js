@@ -52,7 +52,7 @@ export default function MexicoForm({
   if (isLoading) return <Loading />;
 
   const getInput = (id, label, isRequired, disabled) => (
-    <div className={classnames(classes.formBodyRowContainer)}>
+    <div className={classnames(classes.inputContainer)}>
       <TextField
         fullWidth
         id={id}
@@ -73,19 +73,28 @@ export default function MexicoForm({
         )}
       />
     </div>
+
   );
 
   return (
     <form id={formId} onSubmit={formik.handleSubmit}>
       <div className={classnames(classes.formBodyContainer)}>
-        {getInput('estado', 'Estado', true, administrativeLevelExist)}
-        {getInput('ciudad', 'Ciudad', true, administrativeLevelExist)}
-        {getInput('colonia', 'Colonia', true, administrativeLevelExist)}
-        {getInput('municipio', 'Delegación', true, administrativeLevelExist)}
-        {getInput('calle', 'Calle', true)}
-        {getInput('codigoPostal', 'Codigo Postal', true)}
-        {getInput('numExt', 'Número exterior', true)}
-        {getInput('numInt', 'Número interior', false)}
+        <div className={classnames(classes.formBodyRowContainer)}>
+          {getInput('ciudad', 'Ciudad', true, administrativeLevelExist)}
+          {getInput('estado', 'Estado', true, administrativeLevelExist)}
+        </div>
+        <div className={classnames(classes.formBodyRowContainer)}>
+          {getInput('colonia', 'Colonia', true, administrativeLevelExist)}
+          {getInput('municipio', 'Delegación', true, administrativeLevelExist)}
+        </div>
+        <div className={classnames(classes.formBodyRowContainer)}>
+          {getInput('codigoPostal', 'Codigo Postal', true)}
+        </div>
+        <div className={classnames(classes.formBodyRowContainer)}>
+          {getInput('calle', 'Calle', true)}
+          {getInput('numExt', 'Número exterior', true)}
+          {getInput('numInt', 'Número interior', false)}
+        </div>
       </div>
     </form>
   );
