@@ -12,9 +12,16 @@ import { useLanguage } from '../../root/LanguageProvider/use';
 import { useService } from '../../root/ServiceProvider/use';
 import { requireSegmentsOrComponents } from './helper';
 
-export default function MexicoForm({ formId, onSubmit, addressComponents }) {
+export default function MexicoForm({
+  formId,
+  onSubmit,
+  addressComponents,
+  segments: currentSegments,
+}) {
   const MexicoClass = getClassAddressByCountry('mx');
-  const MexicoAddress = new MexicoClass(MexicoClass.getSegmentsFromComponents(addressComponents));
+  const MexicoAddress = !currentSegments
+    ? new MexicoClass(MexicoClass.getSegmentsFromComponents(addressComponents))
+    : new MexicoClass(currentSegments);
   const validationSchema = MexicoAddress.getValidator();
 
   const classes = getStyles();
