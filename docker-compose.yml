@@ -10,16 +10,3 @@ services:
       MONGO_INITDB_ROOT_USERNAME: user
       MONGO_INITDB_ROOT_PASSWORD: user
       MONGO_INITDB_DATABASE: conekta-places
-  api:
-    build: backend
-    command: npm run start:dev
-    volumes:
-      - ./backend:/usr/src/app
-    ports:
-      - "1337:1337"
-    environment:
-      NODE_ENV: development
-      PRINT_ENV_VARS_AT_STARTUP: "true"
-      CLIENT_APP_ID: conekta-places
-      PORT: 1337
-      MONGO_URI: mongodb://user:user@localhost:27017/conekta-places?authSource=admin
