@@ -9,6 +9,7 @@ export default (Server) => {
   router.get('/country/:countryId/info/postalcode/:postalCode', controller.getPostalCodeInfo.bind(controller));
   router.get('/country/:countryId/address', controller.getAddresses.bind(controller));
   router.post('/country/:countryId/address', controller.saveAddress.bind(controller));
+  router.delete('/country/address/:id', controller.deleteAddress.bind(controller));
 
   return router;
 };

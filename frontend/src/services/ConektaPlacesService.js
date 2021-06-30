@@ -52,6 +52,22 @@ export class ConektaPlacesService {
     }
   }
 
+  async deleteAddress(id) {
+    try {
+      const url = `${this.apiUrl}/api/v1/country/address/${id}`;
+      const headers = this.getHeaders();
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers,
+      });
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
+
   getHeaders() {
     return {
       'x-application-id': this.appId,

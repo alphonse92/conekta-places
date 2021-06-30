@@ -4,8 +4,7 @@ import classnames from 'classnames';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import validationSchema from 'conekta-places-lib/dist/schemas/models/validators/mexico';
-import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/address';
+import { getClassAddressByCountry } from 'conekta-places-lib/dist/helpers/country';
 
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
@@ -26,9 +25,11 @@ export default function MexicoForm() {
 
   const { conekta: service } = useService();
 
-  const extractedFeatures = getCountrySegmentsExtrator('mx')(addressComponents);
+  const MexicoClass = getClassAddressByCountry('mx');
+  const MexicoAddress = MexicoClass.createInstanceFromComponents(addressComponents);
+  const validationSchema = MexicoAddress.getValidator();
 
-  const [initialValues, setInitialValues] = useState(extractedFeatures);
+  const [initialValues, setInitialValues] = useState(MexicoAddress.segments);
   const [isLoading, setIsLoading] = useState(false);
   const [administrativeLevelExist, setAdministrativeLevelExist] = useState(false);
   const [apiSaveResult, setApiSaveResult] = useState();
@@ -41,7 +42,7 @@ export default function MexicoForm() {
     const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode('mx', initialValues.codigoPostal);
     setIsLoading(false);
     if (administrativeLevelInformation) {
-      const newInitValues = { ...extractedFeatures, ...administrativeLevelInformation };
+      const newInitValues = { ...MexicoAddress.segments, ...administrativeLevelInformation };
       setInitialValues(newInitValues);
       setAdministrativeLevelExist(true);
     }
@@ -52,6 +53,7 @@ export default function MexicoForm() {
       const result = await submit(values);
       setApiSaveResult({ result, ok: true });
     } catch (e) {
+      console.log(e);
       setApiSaveResult({ ok: false });
     }
   };

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getAvailableCountries } from 'conekta-places-lib/dist/helpers/country';
 import configurationContext from './context';
 
 export const ConfigurationProvider = ({
@@ -23,6 +24,8 @@ export const ConfigurationProvider = ({
     },
   };
 
+  const isCountryAvailable = (countryId) => Boolean(getAvailableCountries()[countryId]);
+
   const contextValue = {
     REACT_APP_ENV,
     REACT_APP_ENV_GOOGLE_API_KEY,
@@ -32,6 +35,7 @@ export const ConfigurationProvider = ({
     REACT_APP_ENV_LANG: REACT_APP_ENV_LANG || document.documentElement.lang || 'en',
     CONEKTA_CREDENTIALS,
     REACT_APP_ENV_PAGINATION_MAX_LIMIT,
+    isCountryAvailable,
   };
 
   return React.createElement(

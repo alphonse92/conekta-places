@@ -45,4 +45,14 @@ export class CountryController extends BaseController {
       res.send(result);
     });
   }
+
+
+  async deleteAddress(req, res) {
+    await super.ensureOperation(req, res, async () => {
+      const { params } = req;
+      const { id } = params;
+      const result = await this.addressManager.delete(id);
+      res.send(result);
+    });
+  }
 }

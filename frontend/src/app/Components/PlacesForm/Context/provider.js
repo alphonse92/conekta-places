@@ -12,7 +12,7 @@ export const FormPlacesProvider = ({
     REACT_APP_ENV_GOOGLE_API_KEY: googleApiKey,
     REACT_APP_ENV_LANG: language,
   } = useConfiguration();
-
+  const { conekta: conektaService } = useService();
   const [fullAddress, setFullAddress] = useState();
   const [selectedLang, setLang] = useState(language);
   const [addressComponents, setAddressComponents] = useState();
@@ -26,8 +26,7 @@ export const FormPlacesProvider = ({
   };
 
   const submit = async (values) => {
-    const { conekta: service } = useService();
-    const result = await service.saveAddress(values);
+    const result = await conektaService.saveAddress(values);
     return result;
   };
 

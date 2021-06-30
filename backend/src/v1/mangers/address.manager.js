@@ -1,6 +1,7 @@
 import _pick from 'lodash/pick';
 import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/address';
-import addressFieldValidatorByCountry from 'conekta-places-lib/dist/schemas/models/validators';
+import { getClassAddressByCountry } from 'conekta-places-lib/dist/helpers/country';
+
 
 import { BaseManager } from './base.manager';
 import { CountryAddressNotSupported } from '../errors/CountryAddressNotSupported';
@@ -22,14 +23,17 @@ export class AddressManager extends BaseManager {
     const { countryId, ...values } = data;
     if (!countryId) throw new CountryIsRequired();
 
-    const countryValidator = addressFieldValidatorByCountry[countryId.toLowerCase()];
-    if (!countryValidator) throw new CountryAddressNotSupported(countryId);
+    const CountryAddressClass = getClassAddressByCountry(countryId);
 
-    const addressKeys = this.getAdddressKeys(countryId);
-    const segments = _pick(values, addressKeys);
+    if (!CountryAddressClass) throw new CountryAddressNotSupported(countryId);
+
+    const segmentNames = CountryAddressClass.getSegmentNames();
+    const segments = _pick(values, segmentNames);
+
+    const CountryAddress = new CountryAddressClass(data);
 
     try {
-      await countryValidator.validate(segments);
+      await CountryAddress.validate(segments);
     } catch (e) {
       const { errors = [], path: field = '' } = e;
       const [errorText] = errors;

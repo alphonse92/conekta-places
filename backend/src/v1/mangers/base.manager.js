@@ -42,6 +42,7 @@ export class BaseManager {
 
   async delete(id) {
     this.checkByInit();
-    console.log('Method not implemented yet', id);
+    const data = await this.model.findByIdAndRemove(id);
+    return data;
   }
 }
