@@ -15,4 +15,6 @@ npm install
 clear
 echo "Backend installed"
 
+cd ../
 docker compose build mongo
+echo "Mongo built successfully"
