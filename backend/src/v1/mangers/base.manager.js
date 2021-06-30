@@ -1,4 +1,5 @@
 import { ManagerNotStarted } from '../errors/ManagerNotStarted';
+import { NotFoundError } from '../errors/NotFoundError';
 
 export class BaseManager {
   constructor(Server) {
@@ -14,6 +15,7 @@ export class BaseManager {
   async get(id) {
     this.checkByInit();
     const data = await this.model.findById(id);
+    if (!data) throw new NotFoundError();
     return data;
   }
 
@@ -38,7 +40,8 @@ export class BaseManager {
 
   async update(id, data) {
     this.checkByInit();
-    console.log('Method not implemented yet', id, data);
+    const savedData = await this.model.findOneAndUpdate({ _id: id }, data);
+    return savedData;
   }
 
   async delete(id) {

@@ -23,7 +23,11 @@ import { useService } from '../../root/ServiceProvider/use';
 import { useLanguage } from '../../root/LanguageProvider/use';
 import { useConfiguration } from '../../root/ConfigurationProvider/use';
 
-export const PlacesTable = ({ countryId }) => {
+export const PlacesTable = ({
+  countryId,
+  onDelete,
+  onPreview,
+}) => {
   const [addresses, setAddresses] = useState([]);
   const [pagination, setPagination] = useState({});
   const [fetching, setFetching] = useState(true);
@@ -53,8 +57,12 @@ export const PlacesTable = ({ countryId }) => {
   };
 
   const makeOnDeleteEvent = (id) => async () => {
-    await service.deleteAddress(id);
+    await onDelete(id);
     await fetchAddress();
+  };
+
+  const makeOnPreviewEvent = (id) => async () => {
+    onPreview(id);
   };
 
   useEffect(async () => {
@@ -87,7 +95,7 @@ export const PlacesTable = ({ countryId }) => {
                 <IconButton onClick={makeOnDeleteEvent(id)}>
                   <DeleteIcon />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={makeOnPreviewEvent(id)}>
                   <VisibilityIcon />
                 </IconButton>
               </TableCell>
@@ -105,4 +113,6 @@ PlacesTable.defaultProps = {
 
 PlacesTable.propTypes = {
   countryId: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
+  onPreview: PropTypes.func.isRequired,
 };

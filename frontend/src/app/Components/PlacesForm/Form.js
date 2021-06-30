@@ -6,7 +6,7 @@ import { useLanguage } from '../../root/LanguageProvider/use';
 import { CountryForm } from '../CountryForms';
 import { useFormPlaces } from './Context/useFormPlaces';
 import { InfoDialog } from '../Dialogs/InfoDialog';
-import { NotAvailableInYourRegion } from './Errors/NoAvailableInYourRegion';
+import { DinoError } from '../Errors/DinoError';
 import { getStyles } from './styles';
 import { ControlButtonContainer } from '../../Layout/ControlButtonsContainer';
 import { useConfiguration } from '../../root/ConfigurationProvider/use';
@@ -31,8 +31,15 @@ export const FormBody = () => {
   const isAvailable = isCountryAvailable(countryId);
   const registerSuccessfuly = apiSaveResult && apiSaveResult.result;
 
-  if (!isAvailable) return <NotAvailableInYourRegion onContinue={exit} />;
-
+  if (!isAvailable) {
+    return (
+      <DinoError
+        onContinue={exit}
+        text={getString('ERROR_COUNTRY_NOT_AVAILABLE')}
+        label={getString('STR_CONTINUE')}
+      />
+    );
+  }
   const onSubmit = async (values) => {
     try {
       const result = await submit(values);

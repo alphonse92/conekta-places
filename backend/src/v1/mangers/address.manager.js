@@ -56,7 +56,7 @@ export class AddressManager extends BaseManager {
   }
 
   async update(id, data) {
-    const cleanedData = data;
-    return super.update(cleanedData);
+    const address = await this.processRequestBody(data);
+    return super.update(id, address);
   }
 }

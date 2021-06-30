@@ -16,7 +16,6 @@ export class ConektaPlacesService {
       const data = await response.json();
       return data;
     } catch (e) {
-      console.error(e);
       return null;
     }
   }
@@ -54,6 +53,23 @@ export class ConektaPlacesService {
       const headers = this.getHeaders();
       const response = await fetch(url, {
         method: 'POST',
+        headers,
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
+
+  async updateAddress(id, values) {
+    try {
+      const url = `${this.apiUrl}/api/v1/address/${id}`;
+      const headers = this.getHeaders();
+      const response = await fetch(url, {
+        method: 'PUT',
         headers,
         body: JSON.stringify(values),
       });

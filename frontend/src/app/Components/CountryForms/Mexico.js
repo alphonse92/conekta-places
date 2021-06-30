@@ -31,7 +31,7 @@ export default function MexicoForm({
   const { getString } = useLanguage();
   const { conekta: service } = useService();
 
-  useEffect(async () => {
+  const refresh = async () => {
     if (!MexicoAddress.getPostalCode()) return;
     setIsLoading(true);
     const administrativeLevelInformation = await service.getAdministrativeLevelsInformationFromPostalCode('mx', MexicoAddress.getPostalCode());
@@ -40,7 +40,11 @@ export default function MexicoForm({
       setSegments({ ...segments, ...administrativeLevelInformation });
       setAdministrativeLevelExist(true);
     }
-  }, []);
+  };
+
+  useEffect(async () => {
+    await refresh();
+  }, [currentSegments, addressComponents]);
 
   const formik = useFormik({
     initialValues: segments,

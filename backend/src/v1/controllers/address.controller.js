@@ -12,6 +12,7 @@ export class AddressController extends BaseController {
     await super.ensureOperation(req, res, async () => {
       const { id } = req.params;
       const result = await this.manager.get(id);
+      console.log(result);
       res.send(result);
     });
   }
@@ -30,9 +31,12 @@ export class AddressController extends BaseController {
   }
 
   async updateAddress(req, res) {
-    const { body } = req;
-    // Do something to store  in database
-    res.send(body);
+    await super.ensureOperation(req, res, async () => {
+      const { body, params } = req;
+      const { id } = params;
+      const result = await this.manager.update(id, body);
+      res.send(result);
+    });
   }
 
   async deleteAddress(req, res) {

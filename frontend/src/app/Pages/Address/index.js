@@ -1,15 +1,19 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import {
+  useParams,
+  useHistory,
+} from 'react-router-dom';
 
 import { Card } from '../../Layout';
 import { PreviewPlace } from '../../Components/PreviewPlace';
 
 export const Address = () => {
   const { id } = useParams();
-  console.log({ id });
+  const history = useHistory();
+  const onBack = () => history.push('/list');
   return (
     <Card>
-      <PreviewPlace id={id} />
+      <PreviewPlace id={id} onBack={onBack} />
     </Card>
   );
 };

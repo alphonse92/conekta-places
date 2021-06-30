@@ -3,16 +3,20 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
+
 import Button from '@material-ui/core/Button';
 
 import { getStyles } from './styles';
-import { useFormPlaces } from '../Context/useFormPlaces';
-import { useLanguage } from '../../../root/LanguageProvider/use';
+// import { useFormPlaces } from '../Context/useFormPlaces';
+// import { useLanguage } from '../../root/LanguageProvider/use';
 
-export const NotAvailableInYourRegion = () => {
+export const DinoError = ({
+  onContinue,
+  text,
+  label,
+}) => {
   const classes = getStyles();
-  const { exit } = useFormPlaces();
-  const { getString } = useLanguage();
 
   return (
     <div className={classnames(classes.errorContainer)}>
@@ -26,18 +30,22 @@ export const NotAvailableInYourRegion = () => {
         </video>
       </div>
       <div className={classnames(classes.controls)}>
-        <p>{getString('ERROR_COUNTRY_NOT_AVAILABLE')}</p>
+        <p>{text}</p>
         <Button
           variant="contained"
           color="primary"
-          onClick={exit}
+          onClick={onContinue}
         >
-          {getString('STR_CONTINUE')}
+          {label}
         </Button>
       </div>
     </div>
   );
 };
 
-NotAvailableInYourRegion.propTypes = {};
-NotAvailableInYourRegion.defaultProps = {};
+DinoError.propTypes = {
+  onContinue: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+};
+DinoError.defaultProps = {};

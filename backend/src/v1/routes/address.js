@@ -8,6 +8,7 @@ export default (Server) => {
 
   router.get('/address/:id', controller.getAddress.bind(controller));
   router.post('/address/', controller.saveAddress.bind(controller));
+  router.put('/address/:id', controller.updateAddress.bind(controller));
 
   return router;
 };
