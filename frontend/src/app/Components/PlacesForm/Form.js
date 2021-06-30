@@ -27,9 +27,13 @@ export const FormBody = () => {
   const [apiSaveResult, setApiSaveResult] = useState();
 
   const { country } = addressComponents;
+  const { id: countryId } = country;
+  const isAvailable = isCountryAvailable(countryId);
   const registerSuccessfuly = apiSaveResult && apiSaveResult.result;
 
-  if (!isCountryAvailable(country.id)) return <NotAvailableInYourRegion onContinue={exit} />;
+  console.log({ country, isAvailable, addressComponents });
+
+  if (!isAvailable) return <NotAvailableInYourRegion onContinue={exit} />;
 
   const onSubmit = async (values) => {
     try {
@@ -68,7 +72,7 @@ export const FormBody = () => {
         <CountryForm
           formId={formId}
           addressComponents={addressComponents}
-          countryId={country.id}
+          countryId={countryId}
           onSubmit={onSubmit}
         />
         <ControlButtonContainer>
