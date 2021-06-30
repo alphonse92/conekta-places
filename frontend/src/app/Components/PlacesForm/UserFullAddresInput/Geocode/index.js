@@ -5,7 +5,7 @@ import { extractGoogleGeocodeComponents } from 'conekta-places-lib/dist/helpers/
 
 import { useFormPlaces } from '../../Context/useFormPlaces';
 import { getStyles } from '../styles';
-import { ControlButtonContainer } from '../../ControlButtonsContainer';
+import { ControlButtonContainer } from '../../../../Layout/ControlButtonsContainer';
 import { useLanguage } from '../../../../root/LanguageProvider/use';
 
 export function GeocodeAddressInput() {

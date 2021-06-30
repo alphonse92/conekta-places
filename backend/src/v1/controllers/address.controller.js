@@ -9,8 +9,11 @@ export class AddressController extends BaseController {
   }
 
   async getAddress(req, res) {
-    // Do something to store  in database
-    res.send('ok');
+    await super.ensureOperation(req, res, async () => {
+      const { id } = req.params;
+      const result = await this.manager.get(id);
+      res.send(result);
+    });
   }
 
   async getList(req, res) {

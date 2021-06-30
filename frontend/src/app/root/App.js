@@ -7,9 +7,10 @@ import {
 } from 'react-router-dom';
 
 import { getStyles } from './App.styles';
-import PlacesForm from '../Components/PlacesForm';
-import { GetStarted } from '../Components/GetStarted';
-import { PlacesPage } from '../Components/PlacesPage';
+import { RegisterPage } from '../Pages/Register';
+import { Places } from '../Pages/Places';
+import { GetStarted } from '../Pages/GetStarted';
+import { Address } from '../Pages/Address';
 
 /**
  * This Component acts as our application container. In order to show how to use the PlacesForm component and Table
@@ -28,10 +29,13 @@ function App() {
         <div className={classnames(classes.formContainer)}>
           <Switch>
             <Route path="/register">
-              <PlacesForm onSubmit={onSubmit} />
+              <RegisterPage onSubmit={onSubmit} />
             </Route>
             <Route path="/list">
-              <PlacesPage />
+              <Places />
+            </Route>
+            <Route path="/address/:id">
+              <Address />
             </Route>
             <Route path="/">
               <GetStarted onStart={onStart} />

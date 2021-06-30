@@ -13,7 +13,8 @@ export class BaseManager {
 
   async get(id) {
     this.checkByInit();
-    console.log('Method not implemented yet', id);
+    const data = await this.model.findById(id);
+    return data;
   }
 
   async getMany(arrayOfId) {

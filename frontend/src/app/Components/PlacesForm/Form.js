@@ -5,10 +5,10 @@ import Button from '@material-ui/core/Button';
 import { useLanguage } from '../../root/LanguageProvider/use';
 import { CountryForm } from '../CountryForms';
 import { useFormPlaces } from './Context/useFormPlaces';
-import { InfoDialog } from './Dialogs/InfoDialog';
+import { InfoDialog } from '../Dialogs/InfoDialog';
 import { NotAvailableInYourRegion } from './Errors/NoAvailableInYourRegion';
 import { getStyles } from './styles';
-import { ControlButtonContainer } from './ControlButtonsContainer';
+import { ControlButtonContainer } from '../../Layout/ControlButtonsContainer';
 import { useConfiguration } from '../../root/ConfigurationProvider/use';
 
 export const FormBody = () => {
@@ -30,8 +30,6 @@ export const FormBody = () => {
   const { id: countryId } = country;
   const isAvailable = isCountryAvailable(countryId);
   const registerSuccessfuly = apiSaveResult && apiSaveResult.result;
-
-  console.log({ country, isAvailable, addressComponents });
 
   if (!isAvailable) return <NotAvailableInYourRegion onContinue={exit} />;
 

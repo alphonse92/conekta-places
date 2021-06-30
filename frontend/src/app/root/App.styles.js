@@ -3,10 +3,11 @@ import { makeStyles } from '@material-ui/core';
 export const getStyles = makeStyles((theme) => ({
   root: {
     margin: 0,
+    padding: 0,
     textAlign: 'center',
     fontFamily: 'roboto, sans-serif',
-    color: theme.palette.primary.color,
-    backgroundColor: theme.palette.primary.background,
+    color: theme.palette.base.white,
+    backgroundColor: theme.palette.primary.color,
   },
   container: {
     minHeight: '100vh',

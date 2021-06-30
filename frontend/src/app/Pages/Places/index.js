@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import Paper from '@material-ui/core/Paper';
 
-import { AvailableCountrySelect } from '../AvailableCountrySelect';
+import { AvailableCountrySelect } from '../../Components/AvailableCountrySelect';
+import { PlacesTable } from '../../Components/PlacesTable';
 import { getStyles } from './styles';
-import { PlacesTable } from '../PlacesTable';
+import { Card } from '../../Layout';
 
-export const PlacesPage = () => {
+export const Places = () => {
   const [countryId, setCountryId] = useState();
   const classes = getStyles();
   return (
-    <Paper elevation={2} classes={{ root: classes.root }}>
+    <Card>
       <div className={classnames(classes.pageContainer)}>
         <div className={classnames(classes.selectCountryContainer)}>
           <AvailableCountrySelect
@@ -22,6 +22,6 @@ export const PlacesPage = () => {
           <PlacesTable countryId={countryId} />
         </div>
       </div>
-    </Paper>
+    </Card>
   );
 };

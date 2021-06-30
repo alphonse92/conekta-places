@@ -8,6 +8,19 @@ export class ConektaPlacesService {
     this.appId = appId;
   }
 
+  async getAddress(id) {
+    try {
+      const url = `${this.apiUrl}/api/v1/address/${id}`;
+      const headers = this.getHeaders();
+      const response = await fetch(url, { method: 'GET', headers });
+      const data = await response.json();
+      return data;
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
+
   async getCountryAddresses(countryId, { page, limit }) {
     try {
       const params = new URLSearchParams({ page, limit });
