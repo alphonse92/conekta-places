@@ -15,7 +15,18 @@ See the demo here: https://youtu.be/oa3ITyOyq_o
 
 # Installations
 
+## Windows 
+If you are on windows environment. Please use the respective commands to install node dependencies in the next folders:
 
+1. lib
+2. frontend
+3. backend
+
+Also, at root run docker compose to build the service called `mongo`
+
+## Linux / Mac
+
+Just run `sudo sh install.sh`. It will do the job for you. (The power of unix)
 
 # Configuration
 
