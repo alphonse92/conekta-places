@@ -10,7 +10,7 @@ import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/addr
 import { useFormPlaces } from '../Context/useFormPlaces';
 import { getStyles } from './styles';
 import { ControlButtonContainer } from '../ControlButtonsContainer';
-import { Loading } from '../Loading';
+import { Loading } from '../../Loading';
 import { InfoDialog } from '../Dialogs/InfoDialog';
 import { useService } from '../../../root/ServiceProvider/use';
 import { useLanguage } from '../../../root/LanguageProvider/use';

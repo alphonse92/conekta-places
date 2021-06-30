@@ -7,13 +7,15 @@ import Select from '@material-ui/core/Select';
 
 import { useService } from '../../root/ServiceProvider/use';
 import { useLanguage } from '../../root/LanguageProvider/use';
+import { getStyles } from './styles';
 
 export const AvailableCountrySelect = ({
-  value: selectedValue,
   onSelect,
 }) => {
+  const [selectedValue, setSelectedValue] = useState('');
   const [options, setOptions] = useState([]);
   const { getString } = useLanguage();
+  const classes = getStyles();
 
   const { conekta: service } = useService();
 
@@ -24,32 +26,34 @@ export const AvailableCountrySelect = ({
         (list, id) => [...list, { label: mapOfCountries[id], id }],
         [],
       );
+    const [first = {}] = arrayOfCountries;
+    const { id: firstId } = first;
+    // setOptions([...arrayOfCountries, { id: 'co', label: 'colombia' }]);
     setOptions(arrayOfCountries);
-    onSelect(arrayOfCountries[0].id);
+    if (firstId) {
+      onSelect(firstId);
+      setSelectedValue(firstId);
+    }
   }, []);
 
   const handleChange = (event) => {
-    onSelect(event.target.value);
+    const countryId = event.target.value;
+    onSelect(countryId);
+    setSelectedValue(countryId);
   };
 
   return (
-    <FormControl>
+    <FormControl classes={{ root: classes.root }}>
       <InputLabel id="demo-simple-select-label">{getString('AVAILABLE_COUNTRY_SELECT_LABEL')}</InputLabel>
-      <Select
-        value={selectedValue}
-        onChange={handleChange}
-      >
+      <Select fullWidth value={selectedValue} onChange={handleChange}>
         {options.map(({ id: value, label }) => <MenuItem key={value} value={value}>{label}</MenuItem>)}
       </Select>
     </FormControl>
   );
 };
 
-AvailableCountrySelect.defaultProps = {
-  value: undefined,
-};
+AvailableCountrySelect.defaultProps = {};
 
 AvailableCountrySelect.propTypes = {
-  value: PropTypes.number,
   onSelect: PropTypes.func.isRequired,
 };

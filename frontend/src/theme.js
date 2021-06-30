@@ -5,6 +5,7 @@ export default createMuiTheme({
   margin: {
     default: '13px',
     double: '26px',
+    extra: '52px',
   },
   breakpoints: {
     values: {

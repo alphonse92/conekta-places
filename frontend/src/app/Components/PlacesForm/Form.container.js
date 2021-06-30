@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormPlaces } from './Context/useFormPlaces';
 import { UserFullAddresInput } from './UserFullAddresInput';
-import { Loading } from './Loading';
+import { Loading } from '../Loading';
 import { FormBody } from './Form';
 
 /**

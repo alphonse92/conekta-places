@@ -12,6 +12,7 @@ export const ConfigurationProvider = ({
     REACT_APP_ENV_PLACES_FORM_SERVICE_API_URL,
     REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID,
     REACT_APP_ENV_LANG,
+    REACT_APP_ENV_PAGINATION_MAX_LIMIT = 15,
   } = process.env;
 
   const CONEKTA_CREDENTIALS = {
@@ -30,6 +31,7 @@ export const ConfigurationProvider = ({
     REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID,
     REACT_APP_ENV_LANG: REACT_APP_ENV_LANG || document.documentElement.lang || 'en',
     CONEKTA_CREDENTIALS,
+    REACT_APP_ENV_PAGINATION_MAX_LIMIT,
   };
 
   return React.createElement(

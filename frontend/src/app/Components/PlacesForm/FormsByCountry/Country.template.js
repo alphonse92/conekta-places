@@ -44,7 +44,6 @@ export default function CountryFormTemplate() {
     validationSchema: mexicoValidatorSchema,
     // If you want to lookup the form data
     // onSubmit: (values) => {
-    //   console.log(values);
     // },
     onSubmit: submit,
 

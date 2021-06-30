@@ -11,6 +11,7 @@ export const useConfiguration = () => {
     REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID,
     REACT_APP_ENV_LANG,
     CONEKTA_CREDENTIALS,
+    REACT_APP_ENV_PAGINATION_MAX_LIMIT,
   } = context;
   return {
     REACT_APP_ENV,
@@ -20,5 +21,6 @@ export const useConfiguration = () => {
     REACT_APP_ENV_PLACES_FORM_SERVICE_APP_ID,
     REACT_APP_ENV_LANG,
     CONEKTA_CREDENTIALS,
+    REACT_APP_ENV_PAGINATION_MAX_LIMIT,
   };
 };
