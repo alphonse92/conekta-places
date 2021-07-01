@@ -12,6 +12,12 @@ npm install
 clear
 echo "language-lib module installed"
 
+
+cd ../conekta-country-address
+npm install
+clear
+echo "conekta-country-address"
+
 cd ../frontend
 npm install
 clear
