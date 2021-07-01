@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "start:dev": "NODE_ENV=development nodemon -L --watch ./index.js --watch ./entry.js --watch ./src --watch ./.env/ --exec node_modules/@babel/node/bin/babel-node.js index.js"
+    "start:dev": "NODE_ENV=development nodemon -L --watch ./index.js --watch ./entry.js --watch ./src --watch ./.env/ --exec node_modules/@babel/node/bin/babel-node.js index.js",
+    "update": "npm update conekta-country-address"
   },
   "author": "",
   "license": "ISC",
@@ -41,6 +42,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "conekta-country-address": "file:../conekta-country-address",
     "conekta-places-lib": "file:../lib",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

@@ -1,6 +1,6 @@
 import _pick from 'lodash/pick';
+import { getClassAddressByCountry } from 'conekta-country-address';
 import { getCountrySegmentsExtrator } from 'conekta-places-lib/dist/helpers/address';
-import { getClassAddressByCountry } from 'conekta-places-lib/dist/helpers/country';
 
 
 import { BaseManager } from './base.manager';

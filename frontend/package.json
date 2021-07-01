@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "axios": "^0.21.1",
+    "conekta-country-address": "file:../conekta-country-address",
     "conekta-language": "file:../language-lib",
     "conekta-places-lib": "file:../lib",
     "formik": "^2.2.9",
@@ -64,7 +65,7 @@
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "update": "npm update conekta-language && npm update conekta-places-lib"
+    "update": "npm update conekta-language && npm update conekta-places-lib && npm update conekta-country-address"
   },
   "eslintConfig": {
     "extends": "airbnb",

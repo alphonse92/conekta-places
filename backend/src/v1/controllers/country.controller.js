@@ -1,4 +1,4 @@
-import { getAvailableCountries } from 'conekta-places-lib/dist/helpers/country';
+import { getAvailableCountries } from 'conekta-country-address';
 
 import { CountryManager } from '../mangers/country.manager';
 import { AddressManager } from '../mangers/address.manager';

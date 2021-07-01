@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { useFormik } from 'formik';
 import TextField from '@material-ui/core/TextField';
-import { getClassAddressByCountry } from 'conekta-places-lib/dist/helpers/country';
+import { getClassAddressByCountry } from 'conekta-country-address';
 
 import { getStyles } from './styles';
 import { Loading } from '../Loading';
@@ -22,7 +22,7 @@ export default function MexicoForm({
   const MexicoAddress = !currentSegments
     ? new MexicoClass(MexicoClass.getSegmentsFromComponents(addressComponents))
     : new MexicoClass(currentSegments);
-  const validationSchema = MexicoAddress.getValidator();
+  const validationSchema = MexicoClass.getValidator();
 
   const classes = getStyles();
   const [segments, setSegments] = useState(MexicoAddress.segments);
