@@ -16,4 +16,7 @@ export const getStyles = makeStyles((theme) => ({
     width: '100%',
     marginBottom: theme.margin.double,
   },
+  buttons: {
+    marginTop: theme.margin.double,
+  },
 }));

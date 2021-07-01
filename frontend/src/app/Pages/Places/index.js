@@ -3,16 +3,20 @@ import classnames from 'classnames';
 import {
   useHistory,
 } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 import { AvailableCountrySelect } from '../../Components/AvailableCountrySelect';
 import { PlacesTable } from '../../Components/PlacesTable';
 import { getStyles } from './styles';
 import { Card } from '../../Layout';
 import { useService } from '../../root/ServiceProvider/use';
+import { ControlButtonContainer } from '../../Layout/ControlButtonsContainer';
+import { useLanguage } from '../../root/LanguageProvider/use';
 
 export const Places = () => {
   const history = useHistory();
   const classes = getStyles();
+  const { getString } = useLanguage();
   const { conekta: service } = useService();
 
   const [countryId, setCountryId] = useState();
@@ -37,6 +41,13 @@ export const Places = () => {
             onPreview={onPreview}
             onDelete={onDelete}
           />
+        </div>
+        <div className={classnames(classes.buttons)}>
+          <ControlButtonContainer>
+            <Button variant="contained" color="primary" onClick={onBack}>
+              {getString('STR_BACK')}
+            </Button>
+          </ControlButtonContainer>
         </div>
       </div>
     </Card>
