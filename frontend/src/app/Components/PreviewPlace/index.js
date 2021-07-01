@@ -57,8 +57,6 @@ export const PreviewPlace = ({ id, onBack }) => {
   const formId = 'PlacesForm';
   const { segments, countryId } = address;
 
-  console.log(Boolean(requestInfoStatus));
-
   return (
     <div className={classnames(classes.root)}>
       <RequestInfoStatus
