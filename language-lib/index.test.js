@@ -1,8 +1,9 @@
-import expect from 'expect';
-import DefaultDictionaries from './dist/dictionary';
-import { LangNotAvailable } from './dist/Errors/LangNotAvailable';
-import { NoLangSelected } from './dist/Errors/NoLangSelected';
-import { CONSTANTS, Dictionary } from './dist';
+const expect = require('expect');
+
+const DefaultDictionaries = require('./dist/dictionary').default;
+const { LangNotAvailable } = require('./dist/Errors/LangNotAvailable');
+const { NoLangSelected } = require('./dist/Errors/NoLangSelected');
+const { CONSTANTS, Dictionary } = require('./dist');
 
 describe('Testing language module', () => {
 
