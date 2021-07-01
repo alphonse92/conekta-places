@@ -17,8 +17,6 @@ var _StringNotFound = require("./Errors/StringNotFound");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 const CONSTANTS = {
   DEFAULT: 'STRING_NOT_FOUND'
 };
@@ -30,11 +28,6 @@ class Dictionary {
   constructor(customDict = _dictionary.default, {
     defaultSelectedLang
   } = {}) {
-    _defineProperty(this, "getDictionaryStrings", () => {
-      this.checkForLangSelected();
-      return Object.keys(this.selectedDict);
-    });
-
     this.dictionary = customDict;
     this.selectedDictName = defaultSelectedLang;
     this.selectedDict = this.dictionary[defaultSelectedLang];
@@ -54,6 +47,11 @@ class Dictionary {
 
   getAvailableLanguages() {
     return Object.keys(this.dictionary);
+  }
+
+  getDictionaryStrings() {
+    this.checkForLangSelected();
+    return Object.keys(this.selectedDict);
   }
 
   getString(StringName, useDict) {

@@ -37,7 +37,7 @@ export class Dictionary {
     return Object.keys(this.dictionary);
   }
 
-  getDictionaryStrings = () => {
+  getDictionaryStrings() {
     this.checkForLangSelected();
     return Object.keys(this.selectedDict);
   }
