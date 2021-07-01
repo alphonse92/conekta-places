@@ -5,7 +5,7 @@ export default {
   STR_CONTINUE: 'Continuar',
   STR_CANCEL: 'Cancelar',
   STR_SKIP: 'Omitir',
-  LINK_TO_ADDRESS_LIST_LABEL: 'Manage your address',
+  LINK_TO_ADDRESS_LIST_LABEL: 'Administra tus direcciones',
   GET_STARTED_BTN_LBL: 'Empezar',
   USER_BUSINESS_NAME_INPUT_LABEL: 'Por favor escribe el nombre de tu negocio',
   USER_BUSINESS_NAME_INPUT_HELPER: 'Por ejemplo: Centro comercial gran America',
