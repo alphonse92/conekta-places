@@ -40,6 +40,7 @@
     "mocha": "^9.0.1"
   },
   "dependencies": {
+    "conekta-language": "file:../language-lib",
     "lodash": "^4.17.21",
     "yup": "^0.32.9"
   },
