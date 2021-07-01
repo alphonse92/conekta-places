@@ -11,7 +11,8 @@
     "start:dev": "NODE_ENV=dev node ./node_modules/@babel/node/bin/babel-node.js ./src/index.js",
     "build": "npm run test:src && npm run compile",
     "compile": "mkdir -p dist && rm -rf dist/*  && NODE_ENV=prod babel src --out-dir dist && npm run test:dist",
-    "publish": "npm run compile"
+    "publish": "npm run compile",
+    "update": "npm update conekta-language"
   },
   "author": "",
   "license": "ISC",

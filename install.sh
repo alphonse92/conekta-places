@@ -6,6 +6,12 @@ cd lib
 npm install
 clear
 echo "Lib module installed"
+
+cd language-lib
+npm install
+clear
+echo "Lib module installed"
+
 cd ../frontend
 npm install
 clear
